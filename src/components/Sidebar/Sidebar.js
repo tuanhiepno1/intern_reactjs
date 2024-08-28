@@ -16,9 +16,9 @@ const { Sider } = Layout;
 
 const Sidebar = () => {
   return (
-    <Sider width={300} className="site-layout-background">
+    <Sider width={350} className="site-layout-background">
       <div className="logo" style={{ padding: '20px', textAlign: 'center' }}>
-        <img src="your-logo-url" alt="Logo" style={{ width: '100%' }} />
+        <img src="../assets/images/Logo.svg" alt="Logo" />
       </div>
       <Menu mode="inline" defaultSelectedKeys={['dashboard']}>
         <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
@@ -47,16 +47,22 @@ const Sidebar = () => {
         <Menu.Item key="settings" icon={<SettingOutlined />}>
           Settings
         </Menu.Item>
-      </Menu>
-      <div className="sidebar-footer" style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
-        <div className="user-info" style={{ padding: '20px' }}>
-          <UserOutlined style={{ fontSize: '24px' }} />
-          <div style={{ marginTop: '10px' }}>
-            <strong>Natalie Brogan</strong>
-            <p>Admin</p>
+        <div className="sidebar-footer" style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
+          <div className="user-info" style={{ padding: '20px' }}>
+            <div className='img-user'>
+              <img src="../assets/images/user.png" alt="Logo"  />
+            </div>
+            <div className='text-info'>
+              <strong>Natalie Brogan</strong>
+              <p>Admin</p>
+            </div>
+            <div>
+                {<SettingOutlined />}
+            </div>
           </div>
-        </div>
       </div>
+      </Menu>
+      
     </Sider>
   );
 };
