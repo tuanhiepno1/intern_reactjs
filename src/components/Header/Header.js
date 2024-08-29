@@ -5,7 +5,7 @@ import '../../assets/styles/Header.css';
 
 const { Header } = Layout;
 
-const CustomHeader = () => {
+const CustomHeader = ({onAddNewProject }) => {
   return (
     <Header className="header-container">
       <Row justify="space-between" align="middle">
@@ -43,7 +43,7 @@ const CustomHeader = () => {
           <Button type="danger" icon={<DeleteOutlined />} className="header-btn-delete">
             Delete
           </Button>
-          <Button type="primary" icon={<PlusOutlined />} className="header-btn-add">
+          <Button type="primary" icon={<PlusOutlined />} className="header-btn-add" onClick={onAddNewProject}>
             Add New Project
           </Button>
         </Col>

@@ -69,9 +69,11 @@
   /* Action Buttons */
 
 .header-action-buttons{
+  display: flex;
   position: absolute;
   right: 0;
   margin-right: 130px;
+  gap: 50px;
   
 }
 .header-action-buttons button{

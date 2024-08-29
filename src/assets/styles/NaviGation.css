@@ -1,6 +1,6 @@
 .layout-container {
     display: flex;
-    height: 100vh; /* Chiều cao 100% của cửa sổ trình duyệt */
+    height: 100%; /* Chiều cao 100% của cửa sổ trình duyệt */
   }
   
   .sidebar-container {
