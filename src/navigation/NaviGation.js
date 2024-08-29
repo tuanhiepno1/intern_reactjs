@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import CustomHeader from "../components/Header/Header";
+import TechnologyHeader from "../components/Header/HeaderTechnology";
+
 import FilterForm from "../screens/FilterForm";
-import "../assets/styles/NaviGation.css";
+import Management from "../screens/Management";
+import TechnologyContent from "../screens/TechnologyManagement"
+;
+import "../assets/styles/Navigation.css";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
 
-const NaviGation = () => {
+const Navigation = () => {
   const [visible, setVisible] = useState(false); 
 
   const handleAddNewProject = () => {
@@ -28,14 +33,27 @@ const NaviGation = () => {
         </div>
         <div className="main-container">
           <Routes>
-            <Route path="/hi" element={ 
+            <Route path="/projectmanagement" element={ 
               <> 
                 <CustomHeader onAddNewProject={handleAddNewProject} />  
                 <FilterForm />
                 </>
               }
             /> 
-
+            <Route path="/positionmanagement" element={ 
+              <> 
+                <CustomHeader  />  
+                <Management />
+                </>
+              }
+            /> 
+            <Route path="/technology-management" element={ 
+              <> 
+                <TechnologyHeader  />  
+                <TechnologyContent />
+                </>
+              }
+            /> 
           </Routes>
         </div>
         <AddNewProjectForm
@@ -48,4 +66,4 @@ const NaviGation = () => {
   );
 };
 
-export default NaviGation;
+export default Navigation;

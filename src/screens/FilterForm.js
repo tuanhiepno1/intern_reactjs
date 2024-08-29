@@ -23,6 +23,7 @@ import {
   RightOutlined
 } from "@ant-design/icons";
 import "../assets/styles/FilterForm.css";
+import { useState } from "react";
 
 
 const { Option } = Select;
@@ -32,12 +33,9 @@ const FilterForm = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
-  const totalItems = 56;
-  const currentPage = 1;
+
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-
-
-  
 
   const projectData = [
     {
@@ -161,7 +159,38 @@ const FilterForm = () => {
       extraMembers: 2,
       issues: 14,
     },
+    {
+      name: "Project 7",
+      status: "Completed",
+      position: "Full-Stack, DevOps",
+      technology: "Node.js, React, Docker",
+      leaders: [
+        { name: "Leader 7", avatar: "https://linktoavatar.com/avatar7.png" },
+      ],
+      mentor: { name: "Mentor 7", avatar: "https://linktoavatar.com/mentor7.png" },
+      zaloLink: "#",
+      startDate: "01 Feb 2023",
+      releaseDate: "01 May 2023",
+      team: [
+        { name: "Member 7", avatar: "https://linktoavatar.com/member7.png" },
+      ],
+      extraMembers: 1,
+      issues: 5,
+    },
+    // Add more projects as needed...
   ];
+
+  const totalItems = projectData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedProjects = projectData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const menu = (
     <Menu>
@@ -272,9 +301,9 @@ const FilterForm = () => {
       {/* Thẻ hiển thị thông tin dự án */}
       
             <Row className="action-project" gutter={[16, 16]}>
-      {projectData.map((project, index) => (
-        <Col key={index}>
-          <Card style={{ borderRadius: '8px' }}>
+      {paginatedProjects.map((project, index) => (
+        <Col key={index} xs={24} sm={12} md={8} lg={8} xl={8}>
+          <Card style={{ borderRadius: '8px', height: '100%' }}>
             <Row justify="space-between" align="middle">
               <Col>
                 <Title level={4}>{project.name}</Title>
@@ -340,19 +369,33 @@ const FilterForm = () => {
     </Row>
     <Row style={{ background: '#f5f5f5', padding: '10px 20px', borderRadius: '20px',width: '100%', marginTop:'40px', marginBottom: '50px', height:'70px' }} justify="space-between" align="middle">
       <Col>
-        <Text>1 - {itemsPerPage} of {totalItems}</Text>
+        <Text>
+          {(currentPage - 1) * itemsPerPage + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}
+        </Text>
       </Col>
       <Col>
         <Row align="middle">
           <Text style={{ marginRight: 8 }}>The page you're on</Text>
-          <Select value={currentPage} style={{ width: 60, marginRight: 16 }}>
-            <Option value={1}>1</Option>
-            <Option value={2}>2</Option>
-            <Option value={3}>3</Option>
-            {/* Bạn có thể thêm các tùy chọn khác */}
+          <Select 
+            value={currentPage} 
+            style={{ width: 60, marginRight: 16 }}
+            onChange={handlePageChange}
+          >
+            {[...Array(totalPages)].map((_, i) => (
+              <Option key={i + 1} value={i + 1}>{i + 1}</Option>
+            ))}
           </Select>
-          <Button icon={<LeftOutlined />} />
-          <Button icon={<RightOutlined />} style={{ marginLeft: 8 }} />
+          <Button 
+            icon={<LeftOutlined />} 
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
+          <Button 
+            icon={<RightOutlined />} 
+            style={{ marginLeft: 8 }}
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+          />
         </Row>
       </Col>
     </Row>

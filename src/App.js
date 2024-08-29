@@ -1,10 +1,10 @@
-import NaviGation from './navigation/NaviGation';
+import Navigation from './navigation/Navigation';
 
 
 function App() {
   return (
     <>
-    <NaviGation/>
+    <Navigation/>
     </>
   );
 }

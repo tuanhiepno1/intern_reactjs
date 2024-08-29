@@ -1,6 +1,6 @@
 /* Header Container */
 .header-container {
-    background-color: #e5e5e5;
+    background-color: #f0f2f5;
     padding: 20px;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
@@ -110,10 +110,7 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .main-container{
-    background-color: #e5e5e5;
-    
-  }
+
 
   .header-search-input{
     font-size: 20px;
