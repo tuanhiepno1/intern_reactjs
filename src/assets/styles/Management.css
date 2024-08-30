@@ -1,0 +1,112 @@
+/* Container chính */
+.management-container {
+    margin-top: 40px;
+    margin-bottom: 45px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 20px;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Card vị trí */
+.position-card {
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background-color: white;
+}
+.ant-card-body{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.position-card .ant-card-body {
+    padding: 16px;
+}
+
+.position-card h4.ant-typography {
+    margin-bottom: 16px;
+}
+
+.position-card .ant-typography {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.position-card a {
+    color: #1890ff;
+    text-decoration: none;
+}
+
+.position-card a:hover {
+    text-decoration: underline;
+}
+
+/* Thông tin vị trí */
+.position-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Số lượng người */
+.people-count {
+    background-color: #e6f7ff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* Checkbox vị trí */
+.position-checkbox {
+    margin-left: 8px;
+}
+
+/* Footer của card */
+.card-footer {
+    margin-top: 24px;
+}
+
+/* Phân trang */
+.pagination-row {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e5e5e5;
+    border-radius: 20px;
+}
+
+.pagination-button {
+    border: none;
+    background: transparent;
+}
+
+.page-select {
+    margin: 0 8px;
+    padding: 4px 8px;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .management-container {
+        padding: 10px;
+    }
+
+    .pagination-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination-row > .ant-col:last-child {
+        margin-top: 10px;
+    }
+}

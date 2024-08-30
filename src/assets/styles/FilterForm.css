@@ -1,0 +1,80 @@
+.filter-form-container {
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .filter-form-container .ant-form-item {
+    margin-bottom: 8px;
+  }
+  .ant-form-item {
+    margin-bottom: 8px;
+
+  }
+  
+  .filter-form-container .ant-form-item-label > label {
+    color: #888;
+  }
+  
+  .filter-form-container .ant-btn {
+    width: 120px;
+    height: 40px;
+  }
+
+  
+  .ant-form-vertical{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+    padding: 25px 40px 0;
+    margin-right: 60px;
+    flex-direction:column;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 50px;
+  }
+
+  .action-buttons{
+    display: flex;
+    flex-direction: column;
+    padding-right: 150px;
+   
+  }
+
+  .input-fields{
+    width: 100%;
+  }
+
+  .input-check{
+    width: 100%;
+    gap: 40px;
+    display: flex;
+  }
+  .action-project {
+    display: flex;
+    flex-wrap: wrap; /* Thêm dòng này */
+    justify-content: flex-start; /* Thay đổi từ space-between sang flex-start */
+    margin-top: 40px;
+    width: 100%;
+    gap: 20px; /* Thêm khoảng cách giữa các thẻ */
+  }
+  .action-project > * {
+    flex: 0 0 calc(33.333% - 20px); /* Chiều rộng cho mỗi thẻ, trừ đi khoảng cách */
+    margin-bottom: 20px; /* Khoảng cách dưới mỗi thẻ */
+  }
+  .start-date-project{
+    gap: 80px;
+  }
+  .avatar-project-management{
+    gap: 10px;
+  }
+  /* Media query cho responsive design */
+  @media (max-width: 1200px) {
+    .action-project > * {
+      flex: 0 0 calc(50% - 20px);
+    }
+  }
+  @media (max-width: 768px) {
+    .action-project > * {
+      flex: 0 0 100%;
+    }
+  }
