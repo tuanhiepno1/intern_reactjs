@@ -1,0 +1,49 @@
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+  max-width: 1000px; /* Adjust based on your layout */
+}
+
+.filter-item {
+  flex: 1 0 calc(33.333% - 10px);
+  min-width: 200px;
+  max-width: calc(33.333% - 10px);
+}
+
+.filter-item .ant-form-item {
+  margin-bottom: 0;
+}
+
+.filter-item .ant-select,
+.filter-item .ant-picker,
+.filter-item .ant-input {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 20px;
+  max-width: 1000px; /* Should match filters-container */
+}
+
+.button-container button {
+  min-width: 120px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.search-button {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.clean-filters-button {
+  background-color: white;
+  color: black;
+  border: 1px solid #d9d9d9;
+}

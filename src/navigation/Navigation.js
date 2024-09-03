@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Sidebar from "../components/Sidebar/Sidebar";
 import CustomHeader from "../components/Header/Header";
 import CustomHeaderManage from "../components/Header/HeaderManagement";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
+import Sidebar from "../components/Sidebar/Sidebar";
 
+import "../assets/styles/Navigation.css";
 import FilterForm from "../screens/FilterForm";
 import Management from "../screens/Management";
-import TechnologyContent from "../screens/TechnologyManagement"
-  ;
-import "../assets/styles/Navigation.css";
+import TechnologyContent from "../screens/TechnologyManagement";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
+import GroupListFeature from "../features/GroupListManagement";
 
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
@@ -37,7 +37,7 @@ const Navigation = () => {
             <Route path="/group-list" element={
               <>
                 <CustomHeaderManage onAddNewProject={handleAddNewProject} />
-                <FilterForm />
+                <GroupListFeature />
               </>
             } />
             < Route path="/projectmanagement" element={
