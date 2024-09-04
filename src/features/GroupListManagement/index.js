@@ -1,6 +1,9 @@
 import { Card } from 'antd';
 import React, { useState } from 'react';
 import GroupList from './pages/grouplist';
+import AddInternForm from './pages/addNewIntern';
+import CustomHeaderManage from './pages/header';
+import CreateGroupModal from './pages/createGroup';
 
 function GroupListFeature(props) {
     const initialData = [
@@ -258,6 +261,8 @@ function GroupListFeature(props) {
         },
     ];
     const [data, setData] = useState(initialData);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isCreateGroupModalVisible, setIsCreateGroupModalVisible] = useState(false);
 
     const handleStatusChange = (key, newStatus) => {
         const newData = data.map(item => {
@@ -288,14 +293,56 @@ function GroupListFeature(props) {
         margin: '20px',
     };
 
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleAdd = (values) => {
+        const newIntern = {
+            key: String(data.length + 1),
+            ...values,
+            comments: [],
+        };
+        setData([...data, newIntern]);
+        setIsModalVisible(false);
+    };
+
+    const showCreateGroupModal = () => {
+        setIsCreateGroupModalVisible(true);
+    };
+
+    const handleCreateGroupCancel = () => {
+        setIsCreateGroupModalVisible(false);
+    };
+
     return (
-        <Card style={containerStyle}>
-            <GroupList
-                data={data}
-                onStatusChange={handleStatusChange}
-                onContractChange={handleContractChange}
+        <div>
+            <CustomHeaderManage
+                onAddNewIntern={showModal}
+                onCreateNewGroup={showCreateGroupModal}
             />
-        </Card>
+            <Card style={containerStyle}>
+                <GroupList
+                    data={data}
+                    onStatusChange={handleStatusChange}
+                    onContractChange={handleContractChange}
+                />
+                <AddInternForm
+                    visible={isModalVisible}
+                    onCancel={handleCancel}
+                    onAdd={handleAdd}
+                />
+                <CreateGroupModal
+                    visible={isCreateGroupModalVisible}
+                    onCancel={handleCreateGroupCancel}
+                    selectedRows={[]} // Pass selected rows if needed
+                />
+            </Card>
+        </div>
     );
 }
 

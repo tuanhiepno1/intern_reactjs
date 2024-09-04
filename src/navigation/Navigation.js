@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import CustomHeader from "../components/Header/Header";
-import CustomHeaderManage from "../components/Header/HeaderManagement";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
 import Sidebar from "../components/Sidebar/Sidebar";
 
@@ -36,7 +35,6 @@ const Navigation = () => {
           <Routes>
             <Route path="/group-list" element={
               <>
-                <CustomHeaderManage onAddNewProject={handleAddNewProject} />
                 <GroupListFeature />
               </>
             } />

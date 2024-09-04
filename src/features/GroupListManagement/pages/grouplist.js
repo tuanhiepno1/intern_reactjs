@@ -33,6 +33,14 @@ function GroupList(props) {
     };
 
     const columns = [
+        {
+            title: '',
+            dataIndex: 'select',
+            key: 'select',
+            render: (_, record) => (
+                <input type="checkbox" />
+            ),
+        },
         { title: 'Intern ID', dataIndex: 'internId', key: 'internId' },
         { title: 'Date Interview', dataIndex: 'dateInterview', key: 'dateInterview' },
         { title: 'Time Interview', dataIndex: 'timeInterview', key: 'timeInterview' },
