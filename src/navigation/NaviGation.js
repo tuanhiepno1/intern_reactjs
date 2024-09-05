@@ -3,16 +3,18 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import CustomHeader from "../components/Header/Header";
+import HeaderZalo from "../components/Header/HeaderZalo";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
 
 import FilterForm from "../screens/FilterForm";
 import Management from "../screens/Management";
-import TechnologyContent from "../screens/TechnologyManagement"
-;
+import TechnologyContent from "../screens/TechnologyManagement";
+import GroupZaloManagement from "../screens/GroupZaloManagement";
+
 import "../assets/styles/Navigation.css";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
-
+import ViewZalo from "../components/modal/ViewZalo";
 const Navigation = () => {
   const [visible, setVisible] = useState(false); 
 
@@ -54,6 +56,20 @@ const Navigation = () => {
                 </>
               }
             /> 
+            <Route path="/group-zalo-management" element={ 
+              <> 
+                <HeaderZalo />  
+               <GroupZaloManagement/>
+               
+                </>
+              }
+            /> 
+            <Route path="/view-zalo/:groupId" element={
+              <>
+              <HeaderZalo />  
+              <ViewZalo /></>
+              }
+            />
           </Routes>
         </div>
         <AddNewProjectForm

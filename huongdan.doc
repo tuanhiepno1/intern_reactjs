@@ -12,21 +12,6 @@
   - App.js: Component gốc của ứng dụng
   - index.js: Điểm khởi đầu của ứng dụng React
 
-## 2. Chức năng chính
-
-1. Quản lý dự án:
-   - Xem danh sách dự án
-   - Thêm dự án mới
-   - Chỉnh sửa dự án
-   - Xóa dự án
-
-2. Lọc và tìm kiếm dự án:
-   - Lọc theo các tiêu chí khác nhau
-   - Tìm kiếm dự án theo từ khóa
-
-3. Điều hướng:
-   - Chuyển đổi giữa các trang và chức năng khác nhau trong ứng dụng
-
 ## 3. Cách hoạt động
 
 1. Khởi động ứng dụng:
