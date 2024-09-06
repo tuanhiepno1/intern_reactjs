@@ -14,6 +14,7 @@ const Login = () => {
         password: ''
     });
     const [loginMessage, setLoginMessage] = useState('');
+    const [rememberMe, setRememberMe] = useState(false); // State để quản lý checkbox "Remember Me"
 
     const navigate = useNavigate();
 
@@ -23,6 +24,10 @@ const Login = () => {
             ...prevState,
             [name]: value
         }));
+    };
+
+    const handleRememberMeChange = (e) => {
+        setRememberMe(e.target.checked);
     };
 
     const handleSubmit = async (e) => {
@@ -54,6 +59,10 @@ const Login = () => {
 
     const handleSignUp = () => {
         navigate('/signup');
+    };
+
+    const handleForgotPassword = () => {
+        navigate('/forgot-password'); // Điều hướng đến trang quên mật khẩu
     };
 
     const handleRoleChange = (roleName) => {
@@ -125,6 +134,19 @@ const Login = () => {
                             />
                         </div>
                         <div className="button-group">
+                            <div className="options-container">
+                                <label className="remember-me">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={rememberMe} 
+                                        onChange={handleRememberMeChange}
+                                    />
+                                    Remember Me
+                                </label>
+                                <a href="#forgot-password" className="forgot-password-link" onClick={handleForgotPassword}>
+                                    Forgot Password?
+                                </a>
+                            </div>
                             <button type="submit">Login</button>
                             <button type="button" className="signup-button" onClick={handleSignUp}>Sign up</button>
                         </div>
