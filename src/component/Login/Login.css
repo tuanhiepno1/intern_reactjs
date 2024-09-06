@@ -1,0 +1,188 @@
+/* Container cho trang đăng nhập */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fcfdff; /* Màu nền của container */
+    position: relative;
+}
+
+/* Vị trí selector ngôn ngữ */
+.language-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.language-selector select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+/* Vị trí logo */
+.login-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.login-logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Kiểu chữ tiêu đề */
+/* Navbar cho việc chọn vai trò */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px; /* Khoảng cách giữa các vai trò và form */
+    border-bottom: 1px solid #ddd; /* Tùy chọn: Thêm đường viền dưới */
+}
+
+/* Kiểu dáng cho nút điều hướng */
+.nav-button {
+    background-color: transparent;
+    border: none;
+    color: #999; /* Màu mặc định cho các nút không hoạt động */
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s, border-color 0.3s;
+    position: relative; /* Để định vị gạch dưới */
+}
+
+.nav-button.active {
+    color: #007bff; /* Màu chữ cho nút đang hoạt động */
+    font-weight: bold; /* Chữ đậm cho nút đang hoạt động */
+}
+
+/* Hiệu ứng gạch dưới cho nút điều hướng đang hoạt động */
+.nav-button::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #007bff; /* Màu gạch dưới */
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px; /* Định vị gạch dưới ngay dưới nút */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-button.active::after {
+    width: 100%; /* Chiều rộng đầy đủ cho nút đang hoạt động */
+}
+
+/* Kiểu dáng của form */
+.login-form {
+    background: #fcfdff;
+    padding: 40px; /* Padding tăng lên để di chuyển nội dung xuống */
+    border-radius: 8px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+    width: 420px;
+    margin-top: 0; /* Đặt margin-top là 0 để căn chỉnh tốt hơn */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Kiểu dáng nhóm form */
+.form-group {
+    margin-bottom: 15px;
+    width: 100%; /* Đảm bảo các trường input chiếm toàn bộ chiều rộng */
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+/* Kiểu dáng trường input */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dad7d7;
+    border-radius: 4px;
+}
+
+/* Kiểu dáng nhóm nút */
+.button-group {
+    display: flex;
+    flex-direction: column; /* Xếp chồng các nút theo chiều dọc */
+    gap: 10px;
+    justify-content: center; /* Căn chỉnh theo chiều dọc */
+    width: 100%; /* Chiều rộng đầy đủ cho nhóm nút */
+}
+
+/* Kiểu dáng chung cho nút */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hiệu ứng hover cho các nút */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Kiểu dáng đặc biệt cho nút Sign up */
+button.signup-button {
+    background-color: #b4c8d9; /* Màu khác cho nút Sign up */
+}
+
+button.signup-button:hover {
+    background-color: #5a5c68; /* Màu hover khác cho nút Sign up */
+}
+
+/* Kiểu dáng cho đoạn văn */
+p {
+    text-align: center;
+    margin: 20px 0; /* Khoảng cách trên và dưới đoạn văn */
+}
+
+/* Phần tử "OR LOGIN WITH" */
+.or-login-with {
+    margin: 0; /* Khoảng cách trên và dưới phần tử */
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+/* Kiểu dáng cho nút Google */
+.google-login {
+    width: 250px;
+    padding: 10px;
+    background-color: #ffffff; /* Màu nền của nút Google */
+    border: 1px solid #dad7d7; /* Thêm đường viền để làm nổi bật nút */
+    border-radius: 4px;
+    color: #000000; /* Màu chữ của nút Google */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center; /* Căn giữa chữ trong nút */
+    display: flex;
+    align-items: center; /* Căn giữa logo và chữ */
+    justify-content: center; /* Căn giữa logo và chữ */
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước tổng thể */
+    height: 50px; /* Đặt chiều cao để phù hợp với nút Sign Up */
+}
+
+/* Tạo thêm khoảng cách giữa logo và chữ trong nút Google */
+.google-login img {
+    margin-right: 10px; /* Khoảng cách giữa logo và chữ */
+    height: 24px; /* Kích thước của logo Google */
+}
+
+/* Hiệu ứng hover cho nút Google */
+.google-login:hover {
+    background-color: #f0f0f0; /* Màu nền khi hover */
+}
