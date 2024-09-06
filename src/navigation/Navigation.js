@@ -13,6 +13,9 @@ import TechnologyContent from "../screens/TechnologyManagement";
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
 import GroupListFeature from "../features/GroupListManagement";
 
+import ConfirmCV from "../screens/ConfirmCV";
+import HeaderCV from "../components/Header/HeaderCV";
+
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
 
@@ -36,6 +39,12 @@ const Navigation = () => {
             <Route path="/group-list" element={
               <>
                 <GroupListFeature />
+              </>
+            } />
+            <Route path="/confirm-cv" element={
+              <>
+                <HeaderCV />
+                <ConfirmCV />
               </>
             } />
             < Route path="/projectmanagement" element={

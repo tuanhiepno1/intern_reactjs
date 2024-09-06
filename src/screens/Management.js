@@ -184,6 +184,8 @@ const Management = () => {
           </Col>
         ))}
       </Row>
+
+      
       <Row className="pagination-row" justify="space-between" align="middle">
         <Col>
           <Text>

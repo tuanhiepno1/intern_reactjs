@@ -67,6 +67,46 @@
   .avatar-project-management{
     gap: 10px;
   }
+
+  .intern-details-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột */
+    gap: 20px; /* Khoảng cách giữa các ô */
+    padding: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; /* Label nằm phía trên */
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px; /* Kích thước font của tiêu đề */
+  }
+  
+  .form-control {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Màu nền giống trong ảnh */
+    font-size: 14px;
+    height: 40px; /* Đảm bảo chiều cao cho các input */
+  }
+  
+  a.form-control {
+    text-decoration: none;
+    color: #007bff; /* Màu xanh cho link */
+    background-color: #f9f9f9;
+  }
+  
+  a.form-control:hover {
+    text-decoration: underline;
+  }
+  
+
+
   /* Media query cho responsive design */
   @media (max-width: 1200px) {
     .action-project > * {
