@@ -1,0 +1,119 @@
+.technology-header {
+    background-color: #f0f2f5;
+    padding: 0;
+    height: auto;
+  }
+  
+  .technology-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 60px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  
+  .technology-header-bottom {
+    background-color: #fff;
+    padding: 0 50px;
+    height: 115px;
+    border-radius: 34px;
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  
+  .technology-title {
+    margin: 0;
+    color: #4B0082;
+  }
+  
+  .technology-user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .technology-user-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  
+  .technology-user-name {
+    font-weight: bold;
+    line-height: 25px;
+  }
+  
+  .technology-user-role {
+    font-size: 12px;
+    color: #8c8c8c;
+    line-height: 25px;
+
+  }
+  
+  .technology-settings-icon {
+    font-size: 20px;
+    color: #8c8c8c;
+    cursor: pointer;
+  }
+  
+  .technology-menu {
+    background: transparent;
+    border-bottom: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .technology-menu .ant-menu-item {
+    padding: 0 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #000000; /* Màu mặc định */
+  }
+  
+  .technology-menu .ant-menu-item:hover {
+    color: #1890ff; /* Màu xanh nước khi hover */
+  }
+  
+  .technology-menu .ant-menu-item-selected {
+    color: #1890ff; /* Màu xanh nước khi được chọn */
+    border-bottom: 2px solid #1890ff;
+  }
+  
+  /* Loại bỏ border-bottom mặc định của Ant Design */
+  .technology-menu.ant-menu-horizontal {
+    border-bottom: none;
+  }
+  
+  /* Loại bỏ background và border khi focus */
+  .technology-menu .ant-menu-item:focus,
+  .technology-menu .ant-menu-item-selected:focus {
+    background: none;
+    border: none;
+  }
+  
+  /* Thêm transition cho hiệu ứng mượt mà */
+  .technology-menu .ant-menu-item {
+    transition: color 0.3s ease;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .technology-header-top,
+    .technology-header-bottom {
+      padding: 16px 20px;
+    }
+  
+    .technology-header-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .technology-user-info {
+      margin-top: 16px;
+    }
+  
+    .technology-menu {
+      margin-top: 16px;
+    }
+  }

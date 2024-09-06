@@ -1,0 +1,19 @@
+.ant-modal{
+    width: 1200px !important;
+    margin-top: 100px;
+}
+
+#add_new_project{
+    margin-left: 0px; 
+    padding: 0px; 
+    margin-right: 0px;
+}
+
+.add-new-project input{
+    height: 50px;
+    border-radius: 15px;
+}
+
+#add_new_project_startDate, #add_new_project_releaseDate{
+    height: 40px;
+}
