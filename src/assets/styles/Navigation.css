@@ -1,0 +1,30 @@
+.layout-container {
+  display: flex;
+  height: 100%; 
+}
+
+.sidebar-container {
+  width: 350px; /* Chiều rộng cố định của Sidebar */
+}
+
+.main-container {
+  flex-grow: 1; /* Phần còn lại của màn hình thuộc về main-container */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f0f2f5
+}
+
+.header {
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Để thêm nội dung bên dưới Header */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fff;
+}

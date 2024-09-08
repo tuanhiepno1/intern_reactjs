@@ -1,0 +1,71 @@
+# Hướng dẫn cấu trúc và hoạt động của dự án
+
+## 1. Cấu trúc thư mục
+
+- src/
+  - components/: Chứa các component React có thể tái sử dụng
+  - navigation/: Chứa các component và logic liên quan đến điều hướng
+  - pages/: Chứa các component trang chính
+  - services/: Chứa các service để tương tác với API hoặc xử lý logic phức tạp
+  - utils/: Chứa các hàm tiện ích và hằng số
+  - styles/: Chứa các file CSS hoặc SCSS toàn cục
+  - App.js: Component gốc của ứng dụng
+  - index.js: Điểm khởi đầu của ứng dụng React
+
+## 2. Chức năng chính
+
+1. Quản lý dự án:
+   - Xem danh sách dự án
+   - Thêm dự án mới
+   - Chỉnh sửa dự án
+   - Xóa dự án
+
+2. Lọc và tìm kiếm dự án:
+   - Lọc theo các tiêu chí khác nhau
+   - Tìm kiếm dự án theo từ khóa
+
+3. Điều hướng:
+   - Chuyển đổi giữa các trang và chức năng khác nhau trong ứng dụng
+
+## 3. Cách hoạt động
+
+1. Khởi động ứng dụng:
+   - index.js render App component
+   - App component thiết lập cấu trúc cơ bản và routing
+
+2. Điều hướng:
+   - NaviGation component trong src/navigation quản lý routing
+   - Sử dụng React Router để xác định các đường dẫn và component tương ứng
+
+3. Hiển thị danh sách dự án:
+   - Trang chính ("/hi") hiển thị CustomHeader và FilterForm
+   - Có thể có một component DanhSachDuAn (chưa hiển thị trong code) để hiển thị danh sách
+
+4. Thêm dự án mới:
+   - Người dùng nhấn nút "Thêm dự án mới" trên CustomHeader
+   - AddNewProjectForm hiển thị như một modal
+   - Sau khi điền thông tin, dữ liệu được gửi đến server (chưa implement trong code hiện tại)
+
+5. Lọc và tìm kiếm:
+   - FilterForm cho phép người dùng nhập các tiêu chí lọc
+   - Khi submit form, một hàm xử lý (chưa hiển thị trong code) sẽ cập nhật danh sách dự án
+
+6. Quản lý trạng thái:
+   - Sử dụng React hooks (useState, useCallback) để quản lý trạng thái local
+   - Có thể sử dụng Redux hoặc Context API cho quản lý trạng thái toàn cục (chưa implement)
+
+7. Tương tác với backend:
+   - Các service trong thư mục services/ sẽ xử lý các request API
+   - Sử dụng Axios hoặc Fetch API để gửi request (chưa hiển thị trong code)
+
+8. Styling:
+   - Sử dụng Ant Design cho các component UI cơ bản
+   - Có thể có các file CSS/SCSS tùy chỉnh trong thư mục styles/
+
+## 4. Lưu ý phát triển
+
+- Tách các component lớn thành các component nhỏ hơn để dễ quản lý
+- Implement xử lý lỗi và loading state cho các tương tác với API
+- Thêm unit test và integration test để đảm bảo tính ổn định của ứng dụng
+- Xem xét sử dụng TypeScript để có type checking tốt hơn
+- Tối ưu hiệu suất bằng cách sử dụng React.memo, useMemo, và useCallback khi cần thiết
