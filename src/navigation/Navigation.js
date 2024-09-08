@@ -11,8 +11,9 @@ import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
-import GroupListFeature from "../features/ListManagement/";
-import InternListFeature from "../features/ListManagement/";
+import ListFeature from "../features/ListManagement";
+
+
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
 
@@ -35,35 +36,32 @@ const Navigation = () => {
           <Routes>
             <Route path="/group-list" element={
               <>
-                <GroupListFeature />
+                <ListFeature />
               </>
             } />
             <Route path="/intern-list" element={
               <>
-                <InternListFeature />
+                <ListFeature />
               </>
             } />
-            < Route path="/projectmanagement" element={
+            <Route path="/projectmanagement" element={
               <>
                 <CustomHeader onAddNewProject={handleAddNewProject} />
                 <FilterForm />
               </>
-            }
-            />
+            } />
             <Route path="/positionmanagement" element={
               <>
                 <CustomHeader />
                 <Management />
               </>
-            }
-            />
+            } />
             <Route path="/technology-management" element={
               <>
                 <TechnologyHeader />
                 <TechnologyContent />
               </>
-            }
-            />
+            } />
           </Routes>
         </div>
         <AddNewProjectForm
