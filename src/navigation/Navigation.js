@@ -11,8 +11,8 @@ import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
-import GroupListFeature from "../features/GroupListManagement";
-
+import GroupListFeature from "../features/ListManagement/";
+import InternListFeature from "../features/ListManagement/";
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
 
@@ -36,6 +36,11 @@ const Navigation = () => {
             <Route path="/group-list" element={
               <>
                 <GroupListFeature />
+              </>
+            } />
+            <Route path="/intern-list" element={
+              <>
+                <InternListFeature />
               </>
             } />
             < Route path="/projectmanagement" element={

@@ -2,7 +2,7 @@ import { LeftOutlined, RightOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Col, Row, Select, Table, Typography, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Filter from './filter';
+import Filter from '../../filter';
 import './style.css';
 
 const { Text } = Typography;

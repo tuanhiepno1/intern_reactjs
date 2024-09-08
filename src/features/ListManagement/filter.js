@@ -2,7 +2,6 @@ import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
-import './style.css';
 
 Filter.propTypes = {
     data: PropTypes.array.isRequired,
