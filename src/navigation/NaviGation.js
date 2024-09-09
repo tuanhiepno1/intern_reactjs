@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Sidebar from "../components/Sidebar/Sidebar";
 import CustomHeader from "../components/Header/Header";
-import HeaderZalo from "../components/Header/HeaderZalo";
-import TechnologyHeader from "../components/Header/HeaderTechnology";
 import HeaderInternList from "../components/Header/HeaderInternList";
+import TechnologyHeader from "../components/Header/HeaderTechnology";
+import HeaderZalo from "../components/Header/HeaderZalo";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 import FilterForm from "../screens/FilterForm";
-import Management from "../screens/Management";
-import TechnologyContent from "../screens/TechnologyManagement";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
 import InternList from "../screens/InternList";
-import GroupListManagement from "../features/ListManagement";
+import Management from "../screens/Management";
+import TechnologyContent from "../screens/TechnologyManagement";
 
 import "../assets/styles/NaviGation.css";
 
 import AddNewProjectForm from "../components/modal/AddNewProjectForm";
-import ViewZalo from "../components/modal/ViewZalo";
 import ScheduleInterview from "../components/modal/ScheduleInterview";
+import ViewZalo from "../components/modal/ViewZalo";
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
   const [isScheduleModalVisible, setIsScheduleModalVisible] = useState(false);
@@ -47,13 +46,17 @@ const Navigation = () => {
         </div>
         <div className="main-container">
           <Routes>
-            <Route path="/group-list" element={
+          <Route path="/group-list" element={
               <>
-              <HeaderInternList />  
-              <GroupListManagement />
+                <ListFeature />
               </>
-              }
-            />
+            } />
+            <Route path="/intern-list" element={
+              <>
+                <ListFeature />
+              </>
+            } />
+
             <Route path="/projectmanagement" element={ 
               <> 
                 <CustomHeader onAddNewProject={handleAddNewProject} />  
