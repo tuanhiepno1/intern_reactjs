@@ -6,6 +6,7 @@ import HeaderInternList from "../components/Header/HeaderInternList";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
 import HeaderZalo from "../components/Header/HeaderZalo";
 import Sidebar from "../components/Sidebar/Sidebar";
+import HeaderCV from "../components/Header/HeaderCV";
 
 import FilterForm from "../screens/FilterForm";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
@@ -13,6 +14,7 @@ import InternList from "../screens/ApproveCV";
 import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 import ListFeature from "../features/ListManagement";
+import ConfirmCV from "../screens/ConfirmCV";
 
 import "../assets/styles/NaviGation.css";
 
@@ -87,13 +89,20 @@ const Navigation = () => {
                 </>
               }
             /> 
+            <Route path="/confirm-cv" element={
+              <>
+              <HeaderCV />  
+              <ConfirmCV />
+              </>
+              }
+            />
             <Route path="/view-zalo/:groupId" element={
               <>
               <HeaderZalo />  
               <ViewZalo /></>
               }l
             />
-            <Route path="/approvecv" element={
+            <Route path="/approve-cv" element={
               <>
               <HeaderInternList onScheduleInterview={handleScheduleInterview} />  
               <InternList onSelectIntern={setSelectedInternId} />

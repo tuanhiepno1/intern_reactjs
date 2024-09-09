@@ -6,12 +6,15 @@
     font-family: 'Inter', sans-serif;
     height: 230px;
   }
+  .header-btn-schedule{
+    background-color: #3f0071;
+  }
   
   /* Title Styling */
   .header-title {
     margin: 0;
     font-size: 24px;
-    color: #3f0071;
+    color: #3f0071 ;
     font-family: 'Inter', sans-serif;
   }
   

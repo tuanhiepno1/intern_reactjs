@@ -1,0 +1,27 @@
+.send-email-form {
+    display: flex;
+
+    gap: 16px;
+  }
+
+
+  .send-email-form-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .send-email-form-item label {
+    width: 120px;
+    text-align: right;
+  }
+
+  .send-email-button {
+    background-color: #3f0071;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
