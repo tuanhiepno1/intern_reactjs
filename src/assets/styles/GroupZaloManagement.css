@@ -90,3 +90,35 @@
   .ant-select-selector{
     border-radius: 15px !important;
   }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+  }
+  
+  .ant-table {
+    min-width: 1500px; /* Điều chỉnh giá trị này tùy thuộc vào tổng chiều rộng của các cột */
+  }
+  
+  .ant-table-wrapper {
+    border: none;
+    padding: 0;
+  }
+  
+  .ant-table-thead > tr > th {
+    white-space: nowrap;
+    background-color: #f0f2f5;
+  }
+  
+  .ant-table-tbody > tr > td {
+    white-space: nowrap;
+  }
+  
+  .ant-pagination {
+    margin-top: 16px;
+  }
+  
+  /* Các styles khác giữ nguyên */

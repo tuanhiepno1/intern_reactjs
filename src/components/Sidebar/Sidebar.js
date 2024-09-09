@@ -40,7 +40,7 @@ const Sidebar = () => {
             <Link to="/intern-list">Intern List</Link>
           </Menu.Item>
           <Menu.Item  key="/group-list">
-            <Link to="/group-list">Group List</Link>
+            <Link to="/group-list">Intern Period</Link>
           </Menu.Item>
         </Menu.SubMenu>
         <Menu.Item className='ant-menu-item-sidebar' key="/projectmanagement" icon={<ProjectOutlined />}>
