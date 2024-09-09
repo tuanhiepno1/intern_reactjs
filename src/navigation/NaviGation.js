@@ -9,9 +9,10 @@ import Sidebar from "../components/Sidebar/Sidebar";
 
 import FilterForm from "../screens/FilterForm";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
-import InternList from "../screens/InternList";
+import InternList from "../screens/ApproveCV";
 import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
+import ListFeature from "../features/ListManagement";
 
 import "../assets/styles/NaviGation.css";
 
@@ -92,7 +93,7 @@ const Navigation = () => {
               <ViewZalo /></>
               }l
             />
-            <Route path="/group-list" element={
+            <Route path="/approvecv" element={
               <>
               <HeaderInternList onScheduleInterview={handleScheduleInterview} />  
               <InternList onSelectIntern={setSelectedInternId} />
