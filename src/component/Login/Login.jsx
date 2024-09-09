@@ -5,7 +5,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import './Login.css';
 import image1 from '../../assets/image1.png';
 import amazingTechLogo from '../../assets/AmazingTech.png';
-import googleLogo from '../../assets/google-logo.png'; // Đường dẫn đến logo Google
+import googleLogo from '../../assets/google-logo.png';
 
 const Login = () => {
     const [role, setRole] = useState('Admin');
@@ -14,8 +14,7 @@ const Login = () => {
         password: ''
     });
     const [loginMessage, setLoginMessage] = useState('');
-    const [rememberMe, setRememberMe] = useState(false); // State để quản lý checkbox "Remember Me"
-
+    const [rememberMe, setRememberMe] = useState(false); 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -46,7 +45,6 @@ const Login = () => {
             if (user) {
                 console.log('Đăng nhập thành công:', user);
                 alert('Đăng nhập thành công');
-                // Thêm logic chuyển hướng nếu cần
             } else {
                 console.error('Đăng nhập thất bại: Invalid credentials or role');
                 alert('Đăng nhập thất bại: Invalid credentials or role');
@@ -62,7 +60,7 @@ const Login = () => {
     };
 
     const handleForgotPassword = () => {
-        navigate('/forgot-password'); // Điều hướng đến trang quên mật khẩu
+        navigate('/reset-password');
     };
 
     const handleRoleChange = (roleName) => {
@@ -72,14 +70,11 @@ const Login = () => {
 
     const handleGoogleSuccess = (credentialResponse) => {
         console.log('Google login success:', credentialResponse);
-        // Xử lý phản hồi đăng nhập thành công từ Google
-        // Thí dụ: gửi token đến server để xác thực
-    };
+        };
 
     const handleGoogleError = (error) => {
         console.error('Google login error:', error);
-        // Xử lý lỗi đăng nhập từ Google
-    };
+        };
 
     return (
         <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">

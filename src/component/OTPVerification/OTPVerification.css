@@ -1,0 +1,149 @@
+
+.otp-verification-page {
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.otp-verification-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.otp-verification-logo {
+    height: 50px;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+}
+
+.language-selector select {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.otp-verification-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.otp-verification-form {
+    background: #fcfdff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.otp-verification-form h2 {
+    color: #363cdd;
+    margin-top: 0;
+}
+
+p {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.form-group-OTP {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group-OTP input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.form-group-OTP input:last-child {
+    margin-right: 0;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.otp-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.timer-and-resend {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timer {
+    font-size: 16px;
+}
+
+.resend-otp-link {
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.resend-otp-link:hover {
+    text-decoration: underline;
+}
+
+.otp-verification-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.otp-verification-button:hover {
+    background-color: #0056b3;
+}
+
+.otp-verification-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.otp-verification-illustration img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
