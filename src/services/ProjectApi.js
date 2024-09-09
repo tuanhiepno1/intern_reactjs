@@ -6,7 +6,7 @@ const fetchProjects = async () => {
       }
       const data = await response.json();
       console.log(data);
-      // Xử lý dữ liệu ở đây
+
       return data;
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
