@@ -12,6 +12,7 @@ import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
 import InternList from "../screens/InternList";
+import GroupListManagement from "../features/ListManagement";
 
 import "../assets/styles/NaviGation.css";
 
@@ -46,6 +47,13 @@ const Navigation = () => {
         </div>
         <div className="main-container">
           <Routes>
+            <Route path="/group-list" element={
+              <>
+              <HeaderInternList />  
+              <GroupListManagement />
+              </>
+              }
+            />
             <Route path="/projectmanagement" element={ 
               <> 
                 <CustomHeader onAddNewProject={handleAddNewProject} />  
