@@ -19,7 +19,7 @@ import AddNewProjectForm from "../components/modal/AddNewProjectForm";
 import ViewZalo from "../components/modal/ViewZalo";
 import ScheduleInterview from "../components/modal/ScheduleInterview";
 const Navigation = () => {
-  const [visible, setVisible] = useState(false); 
+  const [visible, setVisible] = useState(false);
   const [isScheduleModalVisible, setIsScheduleModalVisible] = useState(false);
   const [selectedInternId, setSelectedInternId] = useState(null);
 
