@@ -1,0 +1,124 @@
+.container {
+
+    margin-top: 40px;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border-radius: 34px;
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  
+  .filter-select {
+    margin-bottom: 16px;
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+  }
+  
+  .groups-container {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .group-item {
+    background-color: #ECECEC;
+    border-radius: 30px;
+    padding: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 30px;
+  }
+  
+  .group-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+  }
+  
+  .avatar-row {
+    display: flex;
+    margin-bottom: 4px;
+  }
+  
+  .avatar-row .ant-avatar {
+    margin-right: -8px;
+    border: 2px solid white;
+  }
+  
+  .group-info h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+
+  }
+  
+  .group-info p {
+    margin: 0;
+    color: #000000;
+    margin-top: 14px;
+  }
+  
+  .more-icon {
+    font-size: 35px;
+    color: #000000;
+
+  }
+  
+  .scroll-down {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    color: #888;
+    font-size: 24px;
+  }
+
+  .header-container-select{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .ant-select-selector{
+    border-radius: 15px !important;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+  }
+  
+  .ant-table {
+    min-width: 1500px; /* Điều chỉnh giá trị này tùy thuộc vào tổng chiều rộng của các cột */
+  }
+  
+  .ant-table-wrapper {
+    border: none;
+    padding: 0;
+  }
+  
+  .ant-table-thead > tr > th {
+    white-space: nowrap;
+    background-color: #f0f2f5;
+  }
+  
+  .ant-table-tbody > tr > td {
+    white-space: nowrap;
+  }
+  
+  .ant-pagination {
+    margin-top: 16px;
+  }
+  
+  /* Các styles khác giữ nguyên */

@@ -40,7 +40,7 @@ const Sidebar = () => {
             <Link to="/intern-list">Intern List</Link>
           </Menu.Item>
           <Menu.Item  key="/group-list">
-            <Link to="/group-list">Group List</Link>
+            <Link to="/group-list">Intern Period</Link>
           </Menu.Item>
         </Menu.SubMenu>
         <Menu.Item className='ant-menu-item-sidebar' key="/projectmanagement" icon={<ProjectOutlined />}>
@@ -59,19 +59,21 @@ const Sidebar = () => {
           <Link to="/settings">Settings</Link>
         </Menu.Item>
       </Menu>
-      <div className="sidebar-footer" style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
-        <div className="user-info" style={{ padding: '20px' }}>
-          <div className='img-user'>
-            <img src="../assets/images/user.png" alt="User"  />
+      <div className="sidebar-footer" style={{ position: 'fixed', bottom: 0, width: '100%', textAlign: 'center' }}>
+        <Link to="/account-management">
+          <div className="user-info">
+            <div className='img-user'>
+              <img src="../assets/images/user.png" alt="User" />
+            </div>
+            <div className='text-info'>
+              <strong>Natalie Brogan</strong>
+              <p>Admin</p>
+            </div>
+            <div>
+              <SettingOutlined />
+            </div>
           </div>
-          <div className='text-info'>
-            <strong>Natalie Brogan</strong>
-            <p>Admin</p>
-          </div>
-          <div>
-            <SettingOutlined />
-          </div>
-        </div>
+        </Link>
       </div>
     </Sider>
   );

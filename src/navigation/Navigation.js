@@ -2,31 +2,45 @@ import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import CustomHeader from "../components/Header/Header";
+import HeaderInternList from "../components/Header/HeaderInternList";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
+import HeaderZalo from "../components/Header/HeaderZalo";
 import Sidebar from "../components/Sidebar/Sidebar";
-
-import "../assets/styles/Navigation.css";
-import FilterForm from "../screens/FilterForm";
-import Management from "../screens/Management";
-import TechnologyContent from "../screens/TechnologyManagement";
-
-import AddNewProjectForm from "../components/modal/AddNewProjectForm";
-import GroupListFeature from "../features/GroupListManagement";
-
-import ConfirmCV from "../screens/ConfirmCV";
 import HeaderCV from "../components/Header/HeaderCV";
 
+import FilterForm from "../screens/FilterForm";
+import GroupZaloManagement from "../screens/GroupZaloManagement";
+import InternList from "../screens/ApproveCV";
+import Management from "../screens/Management";
+import TechnologyContent from "../screens/TechnologyManagement";
+import ListFeature from "../features/ListManagement";
+import ConfirmCV from "../screens/ConfirmCV";
+
+import "../assets/styles/Navigation.css";
+
+import AddNewProjectForm from "../components/modal/AddNewProjectForm";
+import ScheduleInterview from "../components/modal/ScheduleInterview";
+import ViewZalo from "../components/modal/ViewZalo";
+import AccountManagement from "../screens/AccountManagement";
 const Navigation = () => {
   const [visible, setVisible] = useState(false);
+  const [isScheduleModalVisible, setIsScheduleModalVisible] = useState(false);
+  const [selectedInternId, setSelectedInternId] = useState(null);
 
   const handleAddNewProject = () => {
     setVisible(true);
   };
 
+  const handleScheduleInterview = (internId) => {
+    setSelectedInternId(internId);
+    setIsScheduleModalVisible(true);
+  };
+
   const handleCreate = (values) => {
     console.log("Received values: ", values);
-    setVisible(false);
+    setVisible(false); 
   };
+  
 
   return (
     <Router>
@@ -36,37 +50,71 @@ const Navigation = () => {
         </div>
         <div className="main-container">
           <Routes>
-            <Route path="/group-list" element={
+          <Route path="/group-list" element={
               <>
-                <GroupListFeature />
+                <ListFeature />
               </>
             } />
+            <Route path="/intern-list" element={
+              <>
+                <ListFeature />
+              </>
+            } />
+
+            <Route path="/projectmanagement" element={ 
+              <> 
+                <CustomHeader onAddNewProject={handleAddNewProject} />  
+                <FilterForm />
+                </>
+              }
+            /> 
+            <Route path="/positionmanagement" element={ 
+              <> 
+                <CustomHeader  />  
+                <Management />
+                </>
+              }
+            /> 
+            <Route path="/technology-management" element={ 
+              <> 
+                <TechnologyHeader  />  
+                <TechnologyContent />
+                </>
+              }
+            /> 
+            <Route path="/group-zalo-management" element={ 
+              <> 
+                <HeaderZalo />  
+               <GroupZaloManagement/>
+               
+                </>
+              }
+            /> 
             <Route path="/confirm-cv" element={
               <>
-                <HeaderCV />
-                <ConfirmCV />
+              <HeaderCV />  
+              <ConfirmCV />
               </>
-            } />
-            < Route path="/projectmanagement" element={
-              <>
-                <CustomHeader onAddNewProject={handleAddNewProject} />
-                <FilterForm />
-              </>
-            }
+              }
             />
-            <Route path="/positionmanagement" element={
+            <Route path="/view-zalo/:groupId" element={
               <>
-                <CustomHeader />
-                <Management />
-              </>
-            }
+              <HeaderZalo />  
+              <ViewZalo /></>
+              }l
             />
-            <Route path="/technology-management" element={
+            <Route path="/approve-cv" element={
               <>
-                <TechnologyHeader />
-                <TechnologyContent />
+              <HeaderInternList onScheduleInterview={handleScheduleInterview} />  
+              <InternList onSelectIntern={setSelectedInternId} />
               </>
-            }
+              }
+            />
+            <Route path="/account-management" element={
+              <>
+              <AccountManagement/>
+              </>
+              }
             />
           </Routes>
         </div>
@@ -74,6 +122,11 @@ const Navigation = () => {
           visible={visible}
           onCreate={handleCreate}
           onCancel={() => setVisible(false)}
+        />
+        <ScheduleInterview
+          visible={isScheduleModalVisible}
+          onClose={() => setIsScheduleModalVisible(false)}
+          internId={selectedInternId}
         />
       </div>
     </Router>

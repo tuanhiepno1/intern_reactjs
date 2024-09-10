@@ -1,0 +1,39 @@
+.intern-list-view-modal .ant-modal-content {
+  border-radius: 10px;
+}
+
+.intern-list-view-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.intern-list-view-modal .ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.intern-list-view-modal .ant-input {
+  background-color: #f5f5f5;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.intern-list-view-modal .ant-typography {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.interview-result-content {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.interview-result-content .ant-row {
+  margin-bottom: 16px;
+}
+
+.interview-result-content .ant-typography {
+  display: block;
+  margin-bottom: 4px;
+}

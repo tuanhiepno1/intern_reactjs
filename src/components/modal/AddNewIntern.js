@@ -1,68 +1,116 @@
 import React from 'react';
-import { Modal, Form, Input, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, Select, Row, Col, Button } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 const AddInternModal = ({ isVisible, onCancel, onAdd }) => {
   const [form] = Form.useForm();
+  const { Option } = Select;
 
-  const handleAdd = () => {
-    form
-      .validateFields()
-      .then(values => {
-        onAdd(values);
-        form.resetFields();
-      })
-      .catch(info => {
-        console.log('Validate Failed:', info);
-      });
-  };
-
+  const onFinish = (values) => {
+    onAdd(values);
+    form.resetFields();
+};
+  
   return (
     <Modal
-      title={<span><PlusOutlined /> Add New Intern</span>}
-      visible={isVisible}
-      onCancel={onCancel}
-      footer={[
-        <Button key="cancel" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button key="add" type="primary" onClick={handleAdd}>
-          Add
-        </Button>,
-      ]}
-    >
-      <Form form={form} layout="vertical">
-        <Form.Item
-          name="fullName"
-          label="Full Name"
-          rules={[{ required: true, message: 'Please input the intern\'s full name!' }]}
+            visible={isVisible}
+            title={<h1 style={{ fontSize: '2em', fontWeight: 'bold'  }}><UserAddOutlined/> Add New Intern</h1>}
+            onCancel={onCancel}
+            footer={null}
+            width={984}
+            className="add-intern-modal"
         >
-          <Input placeholder="Full Name" />
-        </Form.Item>
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={[{ required: true, type: 'email', message: 'Please input a valid email!' }]}
-        >
-          <Input placeholder="Email" />
-        </Form.Item>
-        <Form.Item
-          name="phoneNumber"
-          label="Phone Number"
-          rules={[{ required: true, message: 'Please input the phone number!' }]}
-        >
-          <Input placeholder="Phone Number" />
-        </Form.Item>
-        <Form.Item
-          name="position"
-          label="Position"
-          rules={[{ required: true, message: 'Please input the position!' }]}
-        >
-          <Input placeholder="Position" />
-        </Form.Item>
-        {/* Add other fields as necessary */}
-      </Form>
-    </Modal>
+            <Form  form={form} layout="horizontal" onFinish={onFinish} className="add-intern-form">
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Form.Item name="internId" rules={[{ required: true }]}>
+                            <label><strong>Intern ID</strong></label>
+                            <Input placeholder="#12345678" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="fullName" rules={[{ required: true }]}>
+                            <label><strong>Full name</strong></label>
+                            <Input placeholder="Vo Tuan Hiep" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="phoneNumber" rules={[{ required: true }]}>
+                            <label><strong>Phone Number</strong></label>
+                            <Input placeholder="0876111815" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Form.Item name="position" rules={[{ required: true }]}>
+                            <label><strong>Position</strong></label>
+                            <Input placeholder="Front-End" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="school" rules={[{ required: true }]}>
+                            <label><strong>School</strong></label>
+                            <Input placeholder="FPT Polytechnic" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="address" rules={[{ required: true }]}>
+                            <label><strong>Address</strong></label>
+                            <Input placeholder="District 6" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Form.Item name="email" rules={[{ required: true, type: 'email' }]}>
+                            <label><strong>Email</strong></label>
+                            <Input placeholder="hiepvo066@gmail.com" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="cv" rules={[{ required: true }]}>
+                            <label><strong>Link CV</strong></label>
+                            <Input placeholder="Link" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="mentor" rules={[{ required: true }]}>
+                            <label><strong>Mentor</strong></label>
+                            <Input placeholder="Minh Phap" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Form.Item name="project" rules={[{ required: true }]}>
+                            <label><strong>Project</strong></label>
+                            <Input placeholder="Intern System" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="groupZalo" rules={[{ required: true }]}>
+                            <label><strong>Group Zalo</strong></label>
+                            <Input placeholder="FE Intern System" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="role" rules={[{ required: true }]}>
+                            <label><strong>Role</strong></label>
+                            <Select placeholder="Leader">
+                                <Option value="Leader">Leader</Option>
+                                <Option value="Member">Member</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="add-intern-button" icon={<UserAddOutlined />}>
+                        Add New Intern
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Modal>
   );
 };
 

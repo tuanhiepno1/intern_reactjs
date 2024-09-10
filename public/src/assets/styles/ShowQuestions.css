@@ -1,0 +1,28 @@
+.ant-tabs-nav-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .ant-tabs-tab {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ant-tabs-tab-active {
+    font-weight: bold;
+  }
+  
+  .ant-input {
+    margin-bottom: 8px;
+  }
+  
+  .ant-btn-icon-only {
+    width: 32px;
+    height: 32px;
+    padding: 2.4px 0;
+    font-size: 16px;
+    border-radius: 2px;
+    vertical-align: -1px;
+  }

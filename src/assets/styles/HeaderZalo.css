@@ -1,0 +1,121 @@
+/* Header Container */
+.header-container {
+    background-color: #f0f2f5;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    height: 230px;
+  }
+  
+  /* Title Styling */
+  .header-title {
+    margin: 0;
+    font-size: 24px;
+    color: #3f0071;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* User Information Section */
+  .header-user-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 40px;
+  }
+  
+  .header-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .header-text-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 15px;
+    line-height: normal;
+  }
+  
+  .header-text-info p {
+    margin: 0;
+    color: #888;
+  }
+  
+  /* Settings Icon */
+  .header-settings-icon {
+    font-size: 24px;
+    color: #ff007a;
+  }
+  
+  /* Search Row */
+  .header-search-row {
+    border-radius: 8px;
+  }
+
+  /* Search Input */
+  .header-search-input {
+    height: 100px;
+    width: 100%; /* Đảm bảo input chiếm đủ chiều rộng của cột */
+    border-radius: 34px;
+  }
+  
+.ant-layout-header{
+  padding: 0 60px ;
+}
+
+
+  /* Action Buttons */
+
+.header-action-buttons{
+  display: flex;
+  position: absolute;
+  right: 0;
+  margin-right: 130px;
+  gap: 20px;
+  
+}
+.header-action-buttons button{
+  height: 45px;
+  width: 150px;
+  border-radius: 15px;
+}
+
+  .header-action-buttons .ant-btn {
+    margin-left: 10px; /* Khoảng cách giữa các nút */
+  }
+  
+  .header-btn-export {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .header-btn-edit {
+    background-color: #fa8c16;
+    border-color: #fa8c16;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .header-btn-delete {
+    background-color: #f5222d;
+    border-color: #f5222d;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .header-btn-add {
+    background-color: #1890ff;
+    border-color: #1890ff;
+    font-family: 'Inter', sans-serif;
+  }
+
+
+
+  .header-search-input{
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 68px;
+    font-family: 'Inter', sans-serif;
+  }
+
