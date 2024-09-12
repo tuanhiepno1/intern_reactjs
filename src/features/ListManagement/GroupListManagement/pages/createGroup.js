@@ -11,8 +11,8 @@ function CreateGroupModal({ visible, onCancel }) {
   const handleOk = () => {
     form.validateFields().then(values => {
       console.log('Form values:', values);
-      // Xử lý logic tạo nhóm ở đây
-      onCancel(); // Đóng modal sau khi xử lý
+
+      onCancel();
     }).catch(info => {
       console.log('Validate Failed:', info);
     });

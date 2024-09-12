@@ -14,7 +14,7 @@ import InternList from "../screens/ApproveCV";
 import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 import ListFeature from "../features/ListManagement";
-import ConfirmCV from "../screens/ConfirmCV";
+import ConfirmCV from "../screens/ConfirmCV_data";
 
 import "../assets/styles/NaviGation.css";
 
@@ -37,9 +37,9 @@ const Navigation = () => {
 
   const handleCreate = (values) => {
     console.log("Received values: ", values);
-    setVisible(false); 
+    setVisible(false);
   };
-  
+
 
   return (
     <Router>
@@ -49,7 +49,7 @@ const Navigation = () => {
         </div>
         <div className="main-container">
           <Routes>
-          <Route path="/group-list" element={
+            <Route path="/group-list" element={
               <>
                 <ListFeature />
               </>
@@ -60,54 +60,54 @@ const Navigation = () => {
               </>
             } />
 
-            <Route path="/projectmanagement" element={ 
-              <> 
-                <CustomHeader onAddNewProject={handleAddNewProject} />  
+            <Route path="/projectmanagement" element={
+              <>
+                <CustomHeader onAddNewProject={handleAddNewProject} />
                 <FilterForm />
-                </>
-              }
-            /> 
-            <Route path="/positionmanagement" element={ 
-              <> 
-                <CustomHeader  />  
+              </>
+            }
+            />
+            <Route path="/positionmanagement" element={
+              <>
+                <CustomHeader />
                 <Management />
-                </>
-              }
-            /> 
-            <Route path="/technology-management" element={ 
-              <> 
-                <TechnologyHeader  />  
+              </>
+            }
+            />
+            <Route path="/technology-management" element={
+              <>
+                <TechnologyHeader />
                 <TechnologyContent />
-                </>
-              }
-            /> 
-            <Route path="/group-zalo-management" element={ 
-              <> 
-                <HeaderZalo />  
-               <GroupZaloManagement/>
-               
-                </>
-              }
-            /> 
+              </>
+            }
+            />
+            <Route path="/group-zalo-management" element={
+              <>
+                <HeaderZalo />
+                <GroupZaloManagement />
+
+              </>
+            }
+            />
             <Route path="/confirm-cv" element={
               <>
-              <HeaderCV />  
-              <ConfirmCV />
+                <HeaderCV />
+                <ConfirmCV />
               </>
-              }
+            }
             />
             <Route path="/view-zalo/:groupId" element={
               <>
-              <HeaderZalo />  
-              <ViewZalo /></>
-              }l
+                <HeaderZalo />
+                <ViewZalo /></>
+            } l
             />
             <Route path="/approve-cv" element={
               <>
-              <HeaderInternList onScheduleInterview={handleScheduleInterview} />  
-              <InternList onSelectIntern={setSelectedInternId} />
+                <HeaderInternList onScheduleInterview={handleScheduleInterview} />
+                <InternList onSelectIntern={setSelectedInternId} />
               </>
-              }
+            }
             />
           </Routes>
         </div>

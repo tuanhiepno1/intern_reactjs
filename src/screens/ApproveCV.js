@@ -1,40 +1,75 @@
-import React, { useState } from "react";
 import {
-  Layout,
-  Row,
-  Col,
-  Button,
-  Input,
-  Table,
-  Select,
-  DatePicker,
-  Space,
-  Pagination,
-} from "antd";
-import {
-  SearchOutlined,
-  PlusOutlined,
   EyeOutlined,
   MessageOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Input,
+  Layout,
+  Pagination,
+  Row,
+  Select,
+  Space,
+  Table,
+  Modal,
+} from "antd";
+import React, { useState, useEffect } from "react";
+import { fetchCVData } from '../services/ProjectApi_cv';
 import "../assets/styles/InternList.css";
 import InternListView from '../components/modal/InternListView';
 
 const { Content } = Layout;
 const { Option } = Select;
 
-const InternList = ({ onSelectIntern }) => {
+const ApproveCV = ({ onSelectIntern }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
+  const [modalComments, setModalComments] = useState([]);
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
+  const [currentComments, setCurrentComments] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadCVData();
+  }, []);
+
+  const loadCVData = async () => {
+    try {
+      setLoading(true);
+      const cvData = await fetchCVData();
+      setData(cvData);
+    } catch (error) {
+      console.error('Error loading CV data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const showModal = (record) => {
     setSelectedIntern(record);
     setIsModalVisible(true);
   };
 
+  const showCommentsModal = (comments) => {
+    setCurrentComments(comments);
+    setIsCommentModalVisible(true);
+  };
+
   const handleModalCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleCommentModalCancel = () => {
+    setIsCommentModalVisible(false);
+  };
+
+  const handleStatusChange = (value, record) => {
+    console.log(`Status changed to ${value} for intern ${record.internId}`);
   };
 
   const columns = [
@@ -58,29 +93,62 @@ const InternList = ({ onSelectIntern }) => {
       render: (text) => <a href={text}>Link</a>,
     },
     {
-      title: "Comments CV",
-      dataIndex: "commentsCV",
-      key: "commentsCV",
-      render: (text, record) => (
-        <Space>
-          <span>{text} comments</span>
-          <Button icon={<PlusOutlined />} size="small" />
-        </Space>
-      ),
+      title: 'Comments',
+      dataIndex: 'commentsCV',
+      key: 'comments',
+      render: (comments) => {
+        if (Array.isArray(comments) && comments.length > 0) {
+          return (
+            <Button onClick={() => showCommentsModal(comments)}>
+              {`${comments.length} comment${comments.length > 1 ? 's' : ''}`}
+              <EyeOutlined style={{ marginLeft: '5px' }} />
+            </Button>
+          );
+        } else if (typeof comments === 'string') {
+          return (
+            <Button onClick={() => showCommentsModal([comments])}>
+              View Comment
+              <EyeOutlined style={{ marginLeft: '5px' }} />
+            </Button>
+          );
+        } else {
+          return (
+            <span>
+              No comments
+              <EyeOutlined style={{ marginLeft: '5px' }} />
+            </span>
+          );
+        }
+      }
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text) => {
-        let color =
-          text === "Passed" ? "green" : text === "Failed" ? "red" : "orange";
-        return <span style={{ color: color }}>{text}</span>;
+      render: (text, record) => {
+        const statusColors = {
+          Passed: "green",
+          Failed: "red",
+          Pending: "orange"
+        };
+        return (
+          <Select
+            defaultValue={text}
+            style={{ width: 100 }}
+            onChange={(value) => handleStatusChange(value, record)}
+          >
+            {Object.entries(statusColors).map(([status, color]) => (
+              <Option key={status} value={status}>
+                <span style={{ color }}>{status}</span>
+              </Option>
+            ))}
+          </Select>
+        );
       },
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: "Button",
+      key: "button",
       render: (_, record) => (
         <Space>
           <Button icon={<EyeOutlined />} size="small" onClick={() => showModal(record)}>
@@ -92,70 +160,6 @@ const InternList = ({ onSelectIntern }) => {
         </Space>
       ),
     },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      internId: "#12345128",
-      dateSubmitted: "2 Jan 2023",
-      fullName: "Esther Eden",
-      dateOfBirth: "16/07/2001",
-      phoneNumber: "0376782528",
-      position: "Back-End",
-      school: "FPT University",
-      address: "District 9",
-      email: "abc@gmail.com",
-      cv: "#",
-      commentsCV: "2",
-      status: "Passed",
-    },
-    {
-        key: "2",
-        internId: "#12345128",
-        dateSubmitted: "2 Jan 2023",
-        fullName: "Esther Eden",
-        dateOfBirth: "16/07/2001",
-        phoneNumber: "0376782528",
-        position: "Back-End",
-        school: "FPT University",
-        address: "District 9",
-        email: "abc@gmail.com",
-        cv: "#",
-        commentsCV: "2",
-        status: "Passed",
-      },
-      {
-        key: "3",
-        internId: "#12345128",
-        dateSubmitted: "2 Jan 2023",
-        fullName: "Esther Eden",
-        dateOfBirth: "16/07/2001",
-        phoneNumber: "0376782528",
-        position: "Back-End",
-        school: "FPT University",
-        address: "District 9",
-        email: "abc@gmail.com",
-        cv: "#",
-        commentsCV: "2",
-        status: "Passed",
-      },
-      {
-        key: "4",
-        internId: "#12345128",
-        dateSubmitted: "2 Jan 2023",
-        fullName: "Esther Eden",
-        dateOfBirth: "16/07/2001",
-        phoneNumber: "0376782528",
-        position: "Back-End",
-        school: "FPT University",
-        address: "District 9",
-        email: "abc@gmail.com",
-        cv: "#",
-        commentsCV: "2",
-        status: "Passed",
-      },
-    // Add more data here...
   ];
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -234,7 +238,7 @@ const InternList = ({ onSelectIntern }) => {
               </Col>
             </Row>
           </div>
-          <div className="table-container" style={{ flex: 3, display: 'flex', flexDirection: 'column',  }}>
+          <div className="table-container" style={{ flex: 3, display: 'flex', flexDirection: 'column', }}>
             <Col>
               <Button icon={<SearchOutlined />}>Clean Filters</Button>
             </Col>
@@ -249,9 +253,10 @@ const InternList = ({ onSelectIntern }) => {
           rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
-          pagination={false} // Remove pagination from the table
+          pagination={false}
+          loading={loading}
         />
-        
+
         <Row
           justify="space-between "
           align="middle"
@@ -260,10 +265,10 @@ const InternList = ({ onSelectIntern }) => {
           <Col>
             <Space align="center" className="pagination-container">
               <span>1 - 5 of 56</span>
-              <Pagination 
-                simple 
-                defaultCurrent={1} 
-                total={56} 
+              <Pagination
+                simple
+                defaultCurrent={1}
+                total={56}
                 pageSize={5}
                 showSizeChanger={false}
               />
@@ -276,9 +281,22 @@ const InternList = ({ onSelectIntern }) => {
           onClose={handleModalCancel}
           internData={selectedIntern}
         />
+
+        <Modal
+          title="Comments"
+          visible={isCommentModalVisible}
+          onCancel={handleCommentModalCancel}
+          footer={null}
+        >
+          <ul>
+            {currentComments.map((comment, index) => (
+              <li key={index}>{comment}</li>
+            ))}
+          </ul>
+        </Modal>
       </Content>
     </Layout>
   );
 };
 
-export default InternList;
+export default ApproveCV;

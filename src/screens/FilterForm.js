@@ -1,45 +1,54 @@
-import React, { useState, useEffect } from "react";
 import {
-  Form,
-  Select,
-  DatePicker,
-  Button,
-  Row,
-  Col,
-  Card,
+  DownOutlined,
+  FilterOutlined,
+  LeftOutlined,
+  RightOutlined,
+  SearchOutlined,
+  UserOutlined,
+  FolderOutlined
+} from "@ant-design/icons";
+import {
   Avatar,
   Badge,
-  Typography,
-  Dropdown,
-  Menu,
+  Button,
+  Card,
   Checkbox,
+  Col,
+  DatePicker,
+  Dropdown,
+  Form,
+  Menu,
+  Row,
+  Select,
+  Typography,
+  Spin
 } from "antd";
-import {
-  SearchOutlined,
-  FilterOutlined,
-  UserOutlined,
-  DownOutlined,
-  LeftOutlined,
-  RightOutlined
-} from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
 import "../assets/styles/FilterForm.css";
-import { fetchProjects } from "../services/ProjectApi";
+import { fetchProjectList } from '../services/ProjectApi_projectlist';
 
 const { Option } = Select;
 const { Text, Title } = Typography;
 
 const FilterForm = () => {
   const [projectData, setProjectData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   useEffect(() => {
     const loadProjects = async () => {
-      const data = await fetchProjects();
-      if (data) {
+      try {
+        setLoading(true);
+        const data = await fetchProjectList();
         setProjectData(data);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+      } finally {
+        setLoading(false);
       }
     };
+
     loadProjects();
   }, []);
 
@@ -71,7 +80,7 @@ const FilterForm = () => {
     <Form
       layout="vertical"
       onFinish={onFinish}
-      style={{ backgroundColor: "#fff", borderRadius: "34px"}}
+      style={{ backgroundColor: "#fff", borderRadius: "34px" }}
     >
       <div className="input-check">
         <div className="input-fields">
@@ -163,75 +172,84 @@ const FilterForm = () => {
         </div>
       </div>
 
-      {/* Thẻ hiển thị thông tin dự án */}
-      <Row className="action-project" gutter={[16, 16]}>
-        {paginatedProjects.map((project, index) => (
-          <Col key={index} xs={24} sm={12} md={8} lg={8} xl={8}>
-            <Card style={{ borderRadius: '8px', height: '100%' }}>
-              <Row justify="space-between" align="middle">
-                <Col>
-                  <Title level={4}>{project.name}</Title>
-                </Col>
-                <Col style={{ textAlign: 'right', display: 'flex', alignItems: 'center' }}>
-                  <Dropdown overlay={menu}>
-                    <Badge
-                      color="yellow"
-                      text={
-                        <span>
-                          {project.status} <DownOutlined />
-                        </span>
-                      }
-                    />
-                  </Dropdown>
-                  <Checkbox style={{ marginLeft: '10px' }} />
-                </Col>
-              </Row>
-              <Row style={{ marginBottom: '8px' }}>
-                <Text strong>Position: </Text>
-                <Text>{project.position}</Text>
-              </Row>
-              <Row style={{ marginBottom: '8px' }}>
-                <Text strong>Technology: </Text>
-                <Text>{project.technology}</Text>
-              </Row>
-              <Row style={{ marginBottom: '8px' }}>
-                <Text strong>Leader - Sub Leader: </Text>
-                <Avatar.Group className="avatar-project-management">
-                  {project.leaders.map((leader, index) => (
-                    <Avatar key={index} src={leader.avatar} icon={<UserOutlined />} />
-                  ))}
-                </Avatar.Group>
-              </Row>
-              <Row style={{ marginBottom: '8px', alignItems: 'center' }}>
-                <Text strong>Mentor: </Text>
-                <Avatar src={project.mentor.avatar} icon={<UserOutlined />} />
-              </Row>
-              <Row style={{ marginBottom: '8px' }}>
-                <Text strong>Group Zalo: </Text>
-                <a href={project.zaloLink}>Link</a>
-              </Row>
-              <Row className="start-date-project" justify="space-between" style={{ marginTop: '12px' }}>
-                <Text style={{ color: 'green' }}>Start Date: {project.startDate}</Text>
-                <Text style={{ color: 'red' }}>Release Date: {project.releaseDate}</Text>
-              </Row>
-              <Row justify="space-between" style={{ marginTop: '12px' }}>
-                <Avatar.Group>
-                  {project.team.map((member, index) => (
-                    <Avatar key={index} src={member.avatar} icon={<UserOutlined />} />
-                  ))}
-                  {project.extraMembers && (
-                    <Avatar style={{ backgroundColor: '#f56a00' }}>
-                      +{project.extraMembers}
-                    </Avatar>
+      {loading ? (
+        <Spin size="large" />
+      ) : (
+        <Row className="action-project" gutter={[16, 16]}>
+          {paginatedProjects.map((project) => (
+            <Col key={project.id} xs={24} sm={12} md={8} lg={8} xl={8}>
+              <Card style={{ borderRadius: '8px', height: '100%' }}>
+                <Row justify="space-between" align="middle">
+                  <Col>
+                    <Title level={4}>{project.name}</Title>
+                  </Col>
+                  <Col style={{ textAlign: 'right', display: 'flex', alignItems: 'center' }}>
+                    <Dropdown overlay={menu}>
+                      <Badge
+                        color="yellow"
+                        text={
+                          <span>
+                            {project.status} <DownOutlined />
+                          </span>
+                        }
+                      />
+                    </Dropdown>
+                    <Checkbox style={{ marginLeft: '10px' }} />
+                  </Col>
+                </Row>
+                <Row style={{ marginBottom: '8px' }}>
+                  <Text strong>Position: </Text>
+                  <Text>{project.position}</Text>
+                </Row>
+                <Row style={{ marginBottom: '8px' }}>
+                  <Text strong>Technology: </Text>
+                  <Text>{project.technology}</Text>
+                </Row>
+                <Row style={{ marginBottom: '8px' }}>
+                  <Text strong>Leader - Sub Leader: </Text>
+                  <Avatar.Group className="avatar-project-management">
+                    {project.leaders && project.leaders.map((leader, index) => (
+                      <Avatar key={index} src={leader.avatar} icon={<UserOutlined />} />
+                    ))}
+                  </Avatar.Group>
+                </Row>
+                <Row style={{ marginBottom: '8px', alignItems: 'center' }}>
+                  <Text strong>Mentor: </Text>
+                  {project.mentor && (
+                    <Avatar src={project.mentor.avatar} icon={<UserOutlined />} />
                   )}
-                </Avatar.Group>
-                <Text>{project.issues} issues</Text>
-              </Row>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <Row style={{ background: '#f5f5f5', padding: '10px 20px', borderRadius: '20px',width: '100%', marginTop:'40px', marginBottom: '50px', height:'70px' }} justify="space-between" align="middle">
+                </Row>
+                <Row style={{ marginBottom: '8px' }}>
+                  <Text strong>Group Zalo: </Text>
+                  <a href={project.zaloLink}>Link</a>
+                </Row>
+                <Row className="start-date-project" justify="space-between" style={{ marginTop: '12px' }}>
+                  <Text style={{ color: 'green' }}>Start Date: {project.startDate}</Text>
+                  <Text style={{ color: 'red' }}>Release Date: {project.releaseDate}</Text>
+                </Row>
+                <Row justify="space-between" style={{ marginTop: '12px' }}>
+                  <Avatar.Group>
+                    {project.team && project.team.map((member, index) => (
+                      <Avatar key={index} src={member.avatar} icon={<UserOutlined />} />
+                    ))}
+                    {project.extraMembers > 0 && (
+                      <Avatar style={{ backgroundColor: '#f56a00' }}>
+                        +{project.extraMembers}
+                      </Avatar>
+                    )}
+                  </Avatar.Group>
+                  <Text>
+                    <FolderOutlined style={{ marginRight: '5px' }} />
+                    {project.issues} issues
+                  </Text>
+                </Row>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
+
+      <Row style={{ background: '#f5f5f5', padding: '10px 20px', borderRadius: '20px', width: '100%', marginTop: '40px', marginBottom: '50px', height: '70px' }} justify="space-between" align="middle">
         <Col>
           <Text>
             {(currentPage - 1) * itemsPerPage + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}
@@ -240,8 +258,8 @@ const FilterForm = () => {
         <Col>
           <Row align="middle">
             <Text style={{ marginRight: 8 }}>The page you're on</Text>
-            <Select 
-              value={currentPage} 
+            <Select
+              value={currentPage}
               style={{ width: 60, marginRight: 16 }}
               onChange={handlePageChange}
             >
@@ -249,13 +267,13 @@ const FilterForm = () => {
                 <Option key={i + 1} value={i + 1}>{i + 1}</Option>
               ))}
             </Select>
-            <Button 
-              icon={<LeftOutlined />} 
+            <Button
+              icon={<LeftOutlined />}
               disabled={currentPage === 1}
               onClick={() => handlePageChange(currentPage - 1)}
             />
-            <Button 
-              icon={<RightOutlined />} 
+            <Button
+              icon={<RightOutlined />}
               style={{ marginLeft: 8 }}
               disabled={currentPage === totalPages}
               onClick={() => handlePageChange(currentPage + 1)}

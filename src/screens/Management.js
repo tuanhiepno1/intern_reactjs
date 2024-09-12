@@ -1,126 +1,51 @@
-import React, { useState } from "react";
+import { LeftOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 import {
-  Card,
-  Row,
-  Col,
   Avatar,
-  Typography,
   Button,
+  Card,
   Checkbox,
+  Col,
+  Row,
   Select,
   Space,
+  Spin,
+  Typography
 } from "antd";
-import { UserOutlined, RightOutlined, LeftOutlined } from "@ant-design/icons";
-import ViewDetailsOfPosition from "../components/modal/ViewDetailsofPosition";
+import React, { useEffect, useState } from "react";
 import "../assets/styles/Management.css";
+import ViewDetailsOfPosition from "../components/modal/ViewDetailsofPosition";
+import { fetchPositionData } from '../services/ProjectApi_position';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
-const positionData = [
-  {
-    title: "Back-End",
-    people: 100,
-    technology: ".NET, Java,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "Front-End",
-    people: 100,
-    technology: "ReactJS,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "Business Analyst",
-    people: 100,
-    technology: "Trello,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "Marketing",
-    people: 100,
-    technology: "Excel, Word,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "Designer",
-    people: 100,
-    technology: "ReactJS,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "Sales Executive",
-    people: 100,
-    technology: "Trello,...",
-    rank: "Intern, Fresher, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  },
-  {
-    title: "DevOps Engineer",
-    people: 50,
-    technology: "Docker, Kubernetes, Jenkins,...",
-    rank: "Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 3,
-  },
-  {
-    title: "Data Scientist",
-    people: 30,
-    technology: "Python, R, TensorFlow,...",
-    rank: "Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 4,
-  },
-  {
-    title: "UI/UX Designer",
-    people: 40,
-    technology: "Figma, Adobe XD,...",
-    rank: "Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 4,
-  },
-  {
-    title: "Product Manager",
-    people: 20,
-    technology: "Jira, Confluence,...",
-    rank: "Middle, Senior",
-    groupZalo: "Link",
-    members: 2,
-  },
-  {
-    title: "QA Engineer",
-    people: 60,
-    technology: "Selenium, JUnit,...",
-    rank: "Intern, Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 6,
-  },
-  {
-    title: "Mobile Developer",
-    people: 80,
-    technology: "React Native, Flutter,...",
-    rank: "Junior, Middle, Senior",
-    groupZalo: "Link",
-    members: 5,
-  }
-];
 
 const Management = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [viewDetailsVisible, setViewDetailsVisible] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
+  const [positionData, setPositionData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const itemsPerPage = 6;
+
+  useEffect(() => {
+    const loadPositions = async () => {
+      try {
+        setLoading(true);
+        console.log('Starting to fetch position data');
+        const data = await fetchPositionData();
+        console.log('Received position data:', data);
+        setPositionData(data);
+      } catch (error) {
+        console.error('Error loading positions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPositions();
+  }, []);
+
 
   const totalItems = positionData.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -143,24 +68,28 @@ const Management = () => {
     setViewDetailsVisible(false);
   };
 
+  if (loading) {
+    return <Spin size="large" />;
+  }
+
   return (
     <div className="management-container">
       <Row gutter={[16, 16]} style={{ rowGap: "40px" }}>
-        {paginatedPositions.map((position, index) => (
+        {paginatedPositions.map((loading, index) => (
           <Col key={index} xs={24} sm={12} md={8}>
             <Card className="position-card">
               <Row justify="space-between" align="middle">
-                <Title level={4}>{position.title}</Title>
+                <Title level={4}>{loading.title}</Title>
                 <div>
-                  <Text className="people-count">{position.people} people</Text>
+                  <Text className="people-count">{loading.people} people</Text>
                   <Checkbox className="position-checkbox" />
                 </div>
               </Row>
               <div className="position-info">
-                <Text>Technology: {position.technology}</Text>
-                <Text>Rank: {position.rank}</Text>
+                <Text>Technology: {loading.technology}</Text>
+                <Text>Rank: {loading.rank}</Text>
                 <Text>
-                  Group Zalo: <a href={position.groupZalo}>Link</a>
+                  Group Zalo: <a href={loading.groupZalo}>Link</a>
                 </Text>
               </div>
               <Row
@@ -172,11 +101,11 @@ const Management = () => {
                   maxCount={4}
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
                 >
-                  {[...Array(position.members)].map((_, i) => (
+                  {[...Array(loading.members)].map((_, i) => (
                     <Avatar key={i} icon={<UserOutlined />} />
                   ))}
                 </Avatar.Group>
-                <Button type="text" icon={<RightOutlined />} onClick={() => showViewDetails(position.title)}>
+                <Button type="text" icon={<RightOutlined />} onClick={() => showViewDetails(loading)}>
                   View Details
                 </Button>
               </Row>

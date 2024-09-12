@@ -23,24 +23,24 @@ const Sidebar = () => {
       <div className="logo" style={{ padding: '20px', textAlign: 'center' }}>
         <img src="../assets/images/Logo.svg" alt="Logo" />
       </div>
-      <Menu  mode="inline" selectedKeys={[location.pathname]}>
+      <Menu mode="inline" selectedKeys={[location.pathname]}>
         <Menu.Item className='ant-menu-item-sidebar' key="/" icon={<DashboardOutlined />}>
           <Link to="/">Dashboard</Link>
         </Menu.Item>
-        <Menu.SubMenu  key="cv-management" icon={<FileOutlined />} title="CV Management">
+        <Menu.SubMenu key="cv-management" icon={<FileOutlined />} title="CV Management">
           <Menu.Item key="/approve-cv">
-            <Link  to="/approve-cv">Approve CV</Link>
+            <Link to="/approve-cv">Approve CV</Link>
           </Menu.Item>
-          <Menu.Item  key="/confirm-cv">
+          <Menu.Item key="/confirm-cv">
             <Link to="/confirm-cv">Confirm CV</Link>
           </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu  key="list-management" icon={<TeamOutlined />} title="List Management">
+        <Menu.SubMenu key="list-management" icon={<TeamOutlined />} title="List Management">
           <Menu.Item key="/intern-list">
             <Link to="/intern-list">Intern List</Link>
           </Menu.Item>
-          <Menu.Item  key="/group-list">
-            <Link to="/group-list">Intern Period</Link>
+          <Menu.Item key="/group-list">
+            <Link to="/group-list">Group List</Link>
           </Menu.Item>
         </Menu.SubMenu>
         <Menu.Item className='ant-menu-item-sidebar' key="/projectmanagement" icon={<ProjectOutlined />}>
@@ -62,7 +62,7 @@ const Sidebar = () => {
       <div className="sidebar-footer" style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
         <div className="user-info" style={{ padding: '20px' }}>
           <div className='img-user'>
-            <img src="../assets/images/user.png" alt="User"  />
+            <img src="../assets/images/user.png" alt="User" />
           </div>
           <div className='text-info'>
             <strong>Natalie Brogan</strong>

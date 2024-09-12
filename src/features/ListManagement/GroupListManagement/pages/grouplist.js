@@ -4,9 +4,21 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Filter from '../../filter';
 import './style.css';
+import ViewInternModal from '../../InternListManagement/pages/viewintern';
 
 const { Text } = Typography;
 const { Option } = Select;
+
+const statusColors = {
+    "In process": "orange",
+    "Out": "red",
+    "Completed OJT": "green"
+};
+
+const contractColors = {
+    "Signed": "green",
+    "Not signed": "red"
+};
 
 GroupList.propTypes = {
     data: PropTypes.array.isRequired,
@@ -18,6 +30,8 @@ function GroupList(props) {
     const { data, onStatusChange, onContractChange } = props;
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalComments, setModalComments] = useState([]);
+    const [isViewModalVisible, setIsViewModalVisible] = useState(false);
+    const [selectedIntern, setSelectedIntern] = useState(null);
 
     const showCommentsModal = (comments) => {
         setModalComments(comments);
@@ -30,6 +44,15 @@ function GroupList(props) {
 
     const handleCancel = () => {
         setIsModalVisible(false);
+    };
+
+    const showViewModal = (record) => {
+        setSelectedIntern(record);
+        setIsViewModalVisible(true);
+    };
+
+    const handleViewModalClose = () => {
+        setIsViewModalVisible(false);
     };
 
     const columns = [
@@ -95,9 +118,11 @@ function GroupList(props) {
                     onChange={(value) => onStatusChange(record.key, value)}
                     style={{ width: 130 }}
                 >
-                    <Option value="In process">In process</Option>
-                    <Option value="Out">Out</Option>
-                    <Option value="Completed OJT">Completed OJT</Option>
+                    {Object.entries(statusColors).map(([value, color]) => (
+                        <Option key={value} value={value}>
+                            <span style={{ color }}>{value}</span>
+                        </Option>
+                    ))}
                 </Select>
             )
         },
@@ -109,19 +134,24 @@ function GroupList(props) {
                 <Select
                     value={contractStatus}
                     onChange={(value) => onContractChange(record.key, value)}
-                    style={{ width: 130 }}
+                    style={{ width: 120 }}
                 >
-                    <Option value="Signed" contractStatus={contractStatus === "Signed"}>Signed</Option>
-                    <Option value="Not signed" contractStatus={contractStatus === "Not signed"}>Not signed</Option>
+                    {Object.entries(contractColors).map(([value, color]) => (
+                        <Option key={value} value={value}>
+                            <span style={{ color }}>{value}</span>
+                        </Option>
+                    ))}
                 </Select>
             )
         },
         {
-            title: 'Button', key: 'button', render: () => (
+            title: 'Button',
+            key: 'button',
+            render: (_, record) => (
                 <div className="action-buttons">
-                    <Button >View</Button>
-                    <Button >Update File</Button>
-                </div >
+                    <Button onClick={() => showViewModal(record)}>View</Button>
+                    <Button>Update File</Button>
+                </div>
             )
         },
     ];
@@ -198,6 +228,12 @@ function GroupList(props) {
                     <p key={index}>{comment}</p>
                 ))}
             </Modal>
+
+            <ViewInternModal
+                visible={isViewModalVisible}
+                onClose={handleViewModalClose}
+                intern={selectedIntern}
+            />
         </div>
     );
 }

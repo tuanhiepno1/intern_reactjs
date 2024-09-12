@@ -1,7 +1,7 @@
 import { Card } from 'antd';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { fetchProjects } from '../../services/ProjectApi_listmanagement';
 import AddInternForm from './GroupListManagement/pages/addNewIntern';
 import CreateGroupModal from './GroupListManagement/pages/createGroup';
 import GroupList from './GroupListManagement/pages/grouplist';
@@ -16,17 +16,17 @@ function ListManagementFeature() {
     const location = useLocation();
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadData = async () => {
             try {
-                const response = await axios.get('https://66de5b3fde4426916ee0e9f3.mockapi.io/ListIntern');
-                setData(response.data);
+                const projectsData = await fetchProjects();
+                setData(projectsData);
             } catch (error) {
                 console.error('Error fetching data:', error);
                 // You might want to set some error state here
             }
         };
 
-        fetchData();
+        loadData();
     }, []);
 
     const containerStyle = {

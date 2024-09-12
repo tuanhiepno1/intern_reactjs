@@ -36,9 +36,16 @@ function InternList({ data, onStatusChange, onContractChange }) {
         setIsModalVisible(false);
     };
 
-    // const handleEdit = (record) => {
-    //     console.log('Editing record:', record);
-    // };
+    const statusColors = {
+        "In process": "orange",
+        "Out": "red",
+        "Completed OJT": "green"
+    };
+
+    const contractColors = {
+        "Signed": "green",
+        "Not signed": "red"
+    };
 
     const columns = [
         {
@@ -101,11 +108,31 @@ function InternList({ data, onStatusChange, onContractChange }) {
                 <Select
                     value={status}
                     onChange={(value) => onStatusChange(record.key, value)}
-                    style={{ width: 130 }}
+                    style={{ width: 100 }}
                 >
-                    <Option value="In process">In process</Option>
-                    <Option value="Out">Out</Option>
-                    <Option value="Completed OJT">Completed OJT</Option>
+                    {Object.entries(statusColors).map(([value, color]) => (
+                        <Option key={value} value={value}>
+                            <span style={{ color }}>{value}</span>
+                        </Option>
+                    ))}
+                </Select>
+            )
+        },
+        {
+            title: 'Internship Contract',
+            dataIndex: 'internshipContract',
+            key: 'internshipContract',
+            render: (contractStatus, record) => (
+                <Select
+                    value={contractStatus}
+                    onChange={(value) => onContractChange(record.key, value)}
+                    style={{ width: 120 }}
+                >
+                    {Object.entries(contractColors).map(([value, color]) => (
+                        <Option key={value} value={value}>
+                            <span style={{ color }}>{value}</span>
+                        </Option>
+                    ))}
                 </Select>
             )
         },
@@ -164,15 +191,6 @@ function InternList({ data, onStatusChange, onContractChange }) {
         setIsViewModalVisible(false);
     };
 
-    // const handleViewModalSave = (updatedData) => {
-    //     console.log('Saving updated intern data:', updatedData);
-    //     const updatedInternList = data.map(item =>
-    //         item.key === selectedIntern.key ? { ...item, ...updatedData } : item
-    //     );
-    //     // You should probably call a function here to update the parent component's state
-    //     // For example: onDataUpdate(updatedInternList);
-    //     setIsViewModalVisible(false);
-    // };
 
     return (
         <div className="group-list-container">
