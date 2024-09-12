@@ -23,14 +23,14 @@ const ResetPassword = () => {
             if (userExists) {
                 // Lưu email vào localStorage
                 localStorage.setItem('resetEmail', email);
-                alert(`Đã gửi yêu cầu đặt lại mật khẩu tới ${email}`);
+                alert(`Sent a password reset request to ${email}`);
                 navigate('/otp-verification'); // Điều hướng tới trang thay đổi mật khẩu
             } else {
                 setErrorMessage('Email does not exist!!');
             }
         } catch (error) {
-            console.error('Có lỗi xảy ra khi kiểm tra email:', error);
-            setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại sau.');
+            console.error('An error occurred when checking the email:', error);
+            setErrorMessage('An error occurred. Please try again later.');
         }
     };
 

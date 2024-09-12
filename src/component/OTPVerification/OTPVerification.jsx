@@ -25,10 +25,10 @@ const OTPVerification = () => {
         setErrorMessage('');
 
         if (otp === '1234') { // Giả sử OTP đúng là '1234', thay đổi nếu cần
-            alert('OTP xác thực thành công!');
+            alert('OTP successfully verified!');
             navigate('/reset-password-page'); // Chuyển hướng đến ResetPasswordPage
         } else {
-            setErrorMessage('Mã OTP không đúng.');
+            setErrorMessage('The OTP code is incorrect!!');
         }
     };
 

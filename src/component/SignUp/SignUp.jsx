@@ -4,6 +4,7 @@ import axios from 'axios';
 import './SignUp.css';  
 import image1 from '../../assets/image1.png';
 import amazingTechLogo from '../../assets/AmazingTech.png';
+import LanguageSelector from '../Login/LanguageSelector'; // Import LanguageSelector
 
 const SignUp = () => {  
     const navigate = useNavigate();  // Khởi tạo useNavigate
@@ -15,6 +16,7 @@ const SignUp = () => {
         fullName: '',
         additionalInfo: {}
     });
+    const [language, setLanguage] = useState('en'); // Thêm state để quản lý ngôn ngữ
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -60,29 +62,23 @@ const SignUp = () => {
 
         try {
             const response = await axios.post('https://66c3f496b026f3cc6ced9351.mockapi.io/user', data);
-            console.log('Đăng ký thành công:', response.data);
-            alert('Đăng ký thành công');
+            console.log('Successful registration:', response.data);
+            alert('Successful registration');
         } catch (error) {
-            console.error('Đăng ký thất bại:', error);
-            alert('Đăng ký thất bại');
+            console.error('Registration failed:', error);
+            alert('Registration failed');
         }
     };
 
     return (
         <div className="sign-up-container">
-            <div className="language-selector">
-                <select>
-                    <option value="en">EN</option>
-                    <option value="vi">VN</option>
-                </select>
-            </div>
+            <LanguageSelector language={language} setLanguage={setLanguage} /> {/* Sử dụng LanguageSelector */}
 
             <div className="sign-up-logo">
                 <img src={amazingTechLogo} alt="AmazingTech Logo" />
             </div>
 
             <div className="sign-up-form">
-            
                 <div className="navbar">
                     {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
                         <button
@@ -94,12 +90,11 @@ const SignUp = () => {
                         </button>
                     ))}
                 </div>
-                <h2 class="login-heading">Sign Up</h2>
+                <h2 className="login-heading">Sign Up</h2>
 
                 <p>Please fill in your details to create your account.</p>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                    
                         <label htmlFor="full-name">Full Name</label>
                         <input 
                             id="full-name" 

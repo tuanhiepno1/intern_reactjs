@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './Login.css';
-
 import image1 from '../../assets/image1.png';
 import amazingTechLogo from '../../assets/AmazingTech.png';
 import googleLogo from '../../assets/google-logo.png';
+import LanguageSelector from './LanguageSelector'; // Import LanguageSelector
 
 const Login = () => {
     const [role, setRole] = useState('Admin');
@@ -16,6 +16,7 @@ const Login = () => {
     });
     const [loginMessage, setLoginMessage] = useState('');
     const [rememberMe, setRememberMe] = useState(false); 
+    const [language, setLanguage] = useState('en'); // Trạng thái ngôn ngữ
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -44,15 +45,15 @@ const Login = () => {
             );
 
             if (user) {
-                console.log('Đăng nhập thành công:', user);
-                alert('Đăng nhập thành công');
+                console.log('Login Successfully:', user);
+                alert('Login Successfully');
             } else {
-                console.error('Đăng nhập thất bại: Invalid credentials or role');
-                alert('Đăng nhập thất bại: Invalid credentials or role');
+                console.error('Login failure: Invalid credentials or role');
+                alert('Login failure: Invalid credentials or role');
             }
         } catch (error) {
-            console.error('Đăng nhập thất bại:', error);
-            alert('Đăng nhập thất bại');
+            console.error('Login failure:', error);
+            alert('Login failure');
         }
     };
 
@@ -76,13 +77,7 @@ const Login = () => {
     return (
         <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
             <div className="login-container">
-                <div className="language-selector">
-                    <select>
-                        <option value="en">EN</option>
-                        <option value="vi">VN</option>
-                    </select>
-                </div>
-
+                <LanguageSelector language={language} setLanguage={setLanguage} /> {/* Sử dụng LanguageSelector */}
                 <div className="login-logo">
                     <img src={amazingTechLogo} alt="AmazingTech Logo" />
                 </div>
