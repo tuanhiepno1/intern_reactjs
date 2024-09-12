@@ -1,9 +1,8 @@
-// src/component/OTPVerification/OTPVerification.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OTPVerification.css';
 import amazingTechLogo from '../../assets/AmazingTech.png';
-import illustration from '../../assets/image1.png';
+import image1 from '../../assets/image1.png';
 
 const OTPVerification = () => {
     const [otp, setOtp] = useState('');
@@ -25,9 +24,9 @@ const OTPVerification = () => {
         e.preventDefault();
         setErrorMessage('');
 
-        if (otp === '123456') {
+        if (otp === '1234') { // Giả sử OTP đúng là '1234', thay đổi nếu cần
             alert('OTP xác thực thành công!');
-            // navigate('/next-page');
+            navigate('/reset-password-page'); // Chuyển hướng đến ResetPasswordPage
         } else {
             setErrorMessage('Mã OTP không đúng.');
         }
@@ -37,6 +36,13 @@ const OTPVerification = () => {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    };
+
+    const handleChange = (e, index) => {
+        const value = e.target.value;
+        if (value.match(/^[0-9]$/)) {
+            setOtp(prev => prev.substring(0, index) + value + prev.substring(index + 1));
+        }
     };
 
     return (
@@ -56,42 +62,16 @@ const OTPVerification = () => {
                     <p>Enter the 4 digit verification code received on your Email ID.</p>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group-OTP">
-                            <input
-                                id="otp1"
-                                type="text"
-                                maxLength="1"
-                                placeholder=""
-                                value={otp[0] || ''}
-                                onChange={(e) => setOtp(e.target.value.padEnd(4, ''))}
-                                required
-                            />
-                            <input
-                                id="otp2"
-                                type="text"
-                                maxLength="1"
-                                placeholder=""
-                                value={otp[1] || ''}
-                                onChange={(e) => setOtp(otp.slice(0, 1) + e.target.value.padEnd(3, ''))}
-                                required
-                            />
-                            <input
-                                id="otp3"
-                                type="text"
-                                maxLength="1"
-                                placeholder=""
-                                value={otp[2] || ''}
-                                onChange={(e) => setOtp(otp.slice(0, 2) + e.target.value.padEnd(2, ''))}
-                                required
-                            />
-                            <input
-                                id="otp4"
-                                type="text"
-                                maxLength="1"
-                                placeholder=""
-                                value={otp[3] || ''}
-                                onChange={(e) => setOtp(otp.slice(0, 3) + e.target.value)}
-                                required
-                            />
+                            {[...Array(4)].map((_, index) => (
+                                <input
+                                    key={index}
+                                    type="text"
+                                    maxLength="1"
+                                    value={otp[index] || ''}
+                                    onChange={(e) => handleChange(e, index)}
+                                    required
+                                />
+                            ))}
                         </div>
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
                         <div className="otp-footer">
@@ -103,8 +83,8 @@ const OTPVerification = () => {
                         </div>
                     </form>
                 </div>
-                <div className="otp-verification-illustration">
-                    <img src={illustration} alt="Illustration" />
+                <div className="otp-verification-image">
+                    <img src={image1} alt="Description of the image" />
                 </div>
             </div>
         </div>

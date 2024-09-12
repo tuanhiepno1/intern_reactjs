@@ -18,26 +18,40 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     background-color: #fff;
+    position: absolute;
+    top: 10px;
+    right: -200px;
+    width: 50px;
 }
-
 .login-logo {
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: -150px;
+    width: 150px;
+    height: 84px;
 }
 
 .login-logo img {
     width: 150px;
     height: auto;
 }
+.login-image{
+    width: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .navbar {
+    top: 150px;
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff;
 }
+
 .nav-button {
+    top: 80px;
     background-color: transparent;
     border: none;
     color: #999;
@@ -47,12 +61,23 @@
     transition: color 0.3s, border-color 0.3s;
     position: relative;
 }
+.login-heading{
+    font-family: inter, sans-serif;
+    font-size: 35px;
+    top: 252px;
+    left: 262px;
 
+}
 .nav-button.active {
     color: #007bff;
     font-weight: bold;
 }
-
+.form-instruction {
+    font-family: inter, sans-serif;
+    top: 300px;
+    font-size: 16px;
+    margin-bottom: 20px; /* Thêm khoảng cách nếu cần thiết */
+}
 .nav-button::after {
     content: "";
     display: block;
@@ -67,15 +92,16 @@
 }
 
 .nav-button.active::after {
+    top: 55px;
     width: 100%;
 }
 
 .login-form {
+    top: 150px;
     background: #fcfdff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px rgba(0, 0, 0, 0.1);
-    width: 420px;
     margin-top: 0;
     display: flex;
     flex-direction: column;
@@ -91,7 +117,12 @@
     margin-bottom: 5px;
 }
 
-
+.login-heading {
+    font-size: 40px; /* Điều chỉnh kích thước chữ nếu cần */
+    margin-top: 80px; /* Thay đổi giá trị này để điều chỉnh khoảng cách từ dòng chữ phía trên */
+    top: 90px;;
+    margin-bottom: -3px;
+}
 .form-group input {
     width: 100%;
     padding: 10px;
@@ -117,12 +148,14 @@
 }
 
 .remember-me {
+    font-family: inter, sans-serif;
     display: flex;
     align-items: center;
     font-size: 14px;
 }
 
 .forgot-password-link {
+    font-family: inter, sans-serif;
     color: #ff0000;
     text-decoration: none;
     font-size: 14px;
@@ -161,15 +194,16 @@ p {
 }
 
 .or-login-with {
-    margin: 0;
+    font-family: inter, sans-serif;
+    margin: 15px;
     font-size: 14px;
     color: #666;
     text-align: center;
 }
 
 .google-login {
-    width: 250px;
-    padding: 10px;
+    width: 320px; /* Đặt chiều rộng bằng với nút Login */
+    padding: 10px; /* Điều chỉnh padding nếu cần */
     background-color: #ffffff;
     border: 1px solid #dad7d7;
     border-radius: 4px;
@@ -181,7 +215,7 @@ p {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    height: 50px;
+    height: 40px;
 }
 
 .google-login img {
@@ -191,4 +225,9 @@ p {
 
 .google-login:hover {
     background-color: #f0f0f0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
 }

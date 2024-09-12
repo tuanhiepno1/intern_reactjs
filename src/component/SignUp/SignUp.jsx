@@ -82,7 +82,7 @@ const SignUp = () => {
             </div>
 
             <div className="sign-up-form">
-            <h2 class="login-heading">Sign Up</h2>
+            
                 <div className="navbar">
                     {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
                         <button
@@ -94,6 +94,7 @@ const SignUp = () => {
                         </button>
                     ))}
                 </div>
+                <h2 class="login-heading">Sign Up</h2>
 
                 <p>Please fill in your details to create your account.</p>
                 <form onSubmit={handleSubmit}>

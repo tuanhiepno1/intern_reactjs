@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import './Login.css';
+
 import image1 from '../../assets/image1.png';
 import amazingTechLogo from '../../assets/AmazingTech.png';
 import googleLogo from '../../assets/google-logo.png';
@@ -68,13 +69,9 @@ const Login = () => {
         setLoginMessage(`Login ${roleName}`);
     };
 
-    const handleGoogleSuccess = (credentialResponse) => {
-        console.log('Google login success:', credentialResponse);
-        };
-
-    const handleGoogleError = (error) => {
-        console.error('Google login error:', error);
-        };
+    const handleGoogleLogin = () => {
+        window.open('https://accounts.google.com/o/oauth2/auth', '_blank');
+    };
 
     return (
         <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
@@ -91,8 +88,6 @@ const Login = () => {
                 </div>
 
                 <div className="login-form">
-                    <h2 className="login-heading">{loginMessage || 'Login Admin'}</h2>
-
                     <div className="navbar">
                         {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
                             <button
@@ -104,8 +99,9 @@ const Login = () => {
                             </button>
                         ))}
                     </div>
-
+                    <h2 className="login-heading">{loginMessage || 'Login Admin'}</h2>
                     <form onSubmit={handleSubmit}>
+                        <p className="form-instruction">Please fill your detail to access your account.</p>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input 
@@ -149,13 +145,10 @@ const Login = () => {
 
                     <p className="or-login-with">OR LOGIN WITH</p>
 
-                    <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleError}
-                        logo={googleLogo}
-                        buttonText="Google"
-                    />
-
+                    <button className="google-login" onClick={handleGoogleLogin}>
+                        <img src={googleLogo} alt="Google Logo" />
+                        Google
+                    </button>
                 </div>
 
                 <div className="login-image">
