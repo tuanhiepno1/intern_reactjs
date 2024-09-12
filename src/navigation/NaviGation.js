@@ -6,12 +6,14 @@ import CustomHeader from "../components/Header/Header";
 import HeaderZalo from "../components/Header/HeaderZalo";
 import TechnologyHeader from "../components/Header/HeaderTechnology";
 import HeaderInternList from "../components/Header/HeaderInternList";
+import HeaderDashboard from "../components/Header/HeaderDashboard";
 
 import FilterForm from "../screens/FilterForm";
 import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
 import InternList from "../screens/InternList";
+import Dashboard from "../screens/Dashboard";
 
 import "../assets/styles/NaviGation.css";
 
@@ -85,6 +87,20 @@ const Navigation = () => {
               <>
               <HeaderInternList onScheduleInterview={handleScheduleInterview} />  
               <InternList onSelectIntern={setSelectedInternId} />
+              </>
+              }
+            />
+            <Route path="/dashboard" element={
+              <>
+              <HeaderDashboard />  
+              <Dashboard />
+              </>
+              }
+            />
+            <Route path="*" element={
+              <>
+              <HeaderDashboard />  
+              <Dashboard />
               </>
               }
             />

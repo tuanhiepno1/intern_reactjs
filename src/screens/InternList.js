@@ -158,9 +158,6 @@ const InternList = ({ onSelectIntern }) => {
     // Add more data here...
   ];
 
-  const onSelectChange = (newSelectedRowKeys) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
 
   const rowSelection = {
     selectedRowKeys,

@@ -5,13 +5,14 @@
   
   .sidebar-container {
     width: 350px; /* Chiều rộng cố định của Sidebar */
+    height: 100vh;
   }
   
   .main-container {
     flex-grow: 1; /* Phần còn lại của màn hình thuộc về main-container */
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     background-color: #f0f2f5
   }
   
