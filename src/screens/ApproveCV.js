@@ -28,7 +28,6 @@ const ApproveCV = ({ onSelectIntern }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedIntern, setSelectedIntern] = useState(null);
-  const [modalComments, setModalComments] = useState([]);
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const [currentComments, setCurrentComments] = useState([]);
   const [data, setData] = useState([]);
@@ -162,9 +161,7 @@ const ApproveCV = ({ onSelectIntern }) => {
     },
   ];
 
-  const onSelectChange = (newSelectedRowKeys) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
+
 
   const rowSelection = {
     selectedRowKeys,

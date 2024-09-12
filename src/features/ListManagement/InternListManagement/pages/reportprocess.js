@@ -58,27 +58,6 @@ const ReportProcessModal = ({ visible, onCancel, onSave, initialData }) => {
         setFormData(prevData => ({ ...prevData, [field]: value }));
     };
 
-    const handleAddReport = () => {
-        setFormData(prevData => ({
-            ...prevData,
-            reports: [...prevData.reports, '']
-        }));
-    };
-
-    const handleRemoveReport = (index) => {
-        setFormData(prevData => ({
-            ...prevData,
-            reports: prevData.reports.filter((_, i) => i !== index)
-        }));
-    };
-
-    const handleReportChange = (index, value) => {
-        setFormData(prevData => ({
-            ...prevData,
-            reports: prevData.reports.map((report, i) => i === index ? value : report)
-        }));
-    };
-
     const handleSave = () => {
         onSave(formData);
     };

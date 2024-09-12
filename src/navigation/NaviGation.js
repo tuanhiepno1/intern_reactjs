@@ -7,6 +7,7 @@ import TechnologyHeader from "../components/Header/HeaderTechnology";
 import HeaderZalo from "../components/Header/HeaderZalo";
 import Sidebar from "../components/Sidebar/Sidebar";
 import HeaderCV from "../components/Header/HeaderCV";
+import HeaderDashboard from "../components/Header/HeaderDashboard";
 
 import FilterForm from "../screens/FilterForm";
 import GroupZaloManagement from "../screens/GroupZaloManagement";
@@ -15,6 +16,7 @@ import Management from "../screens/Management";
 import TechnologyContent from "../screens/TechnologyManagement";
 import ListFeature from "../features/ListManagement";
 import ConfirmCV from "../screens/ConfirmCV_data";
+import Dashboard from "../screens/Dashboard";
 
 import "../assets/styles/NaviGation.css";
 
@@ -108,6 +110,20 @@ const Navigation = () => {
                 <InternList onSelectIntern={setSelectedInternId} />
               </>
             }
+            />
+            <Route path="/dashboard" element={
+              <>
+              <HeaderDashboard />  
+              <Dashboard />
+              </>
+              }
+            />
+            <Route path="/" element={
+              <>
+              <HeaderDashboard />  
+              <Dashboard />
+              </>
+              }
             />
           </Routes>
         </div>

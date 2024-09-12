@@ -1,0 +1,40 @@
+
+.dashboard-layout{
+    padding: 0 60px;
+    
+}
+.dashboard-content{
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 34px;
+}
+.dashboard-summary{
+    display: flex;
+    justify-content: space-between;
+}
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.dashboard-summary h3{
+    font-size: 50px;
+    font-weight: 600;
+}
+.dashboard-summary p {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    width: 100%; /* Đảm bảo văn bản chiếm toàn bộ chiều rộng */
+    word-wrap: break-word; /* Cho phép từ xuống dòng khi cần */
+}
+.dashboard-summary-title{
+    margin-left: 100px;
+}
+
+.dashboard-summary-title-school{
+    display: flex;
+    justify-content: center;
+}

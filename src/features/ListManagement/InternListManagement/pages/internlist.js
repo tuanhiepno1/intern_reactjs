@@ -177,8 +177,7 @@ function InternList({ data, onStatusChange, onContractChange }) {
         const updatedInternList = data.map(item =>
             item.key === selectedIntern.key ? { ...item, ...updatedData } : item
         );
-        // You should probably call a function here to update the parent component's state
-        // For example: onDataUpdate(updatedInternList);
+        console.log(updatedInternList);
         setIsReportProcessModalVisible(false);
     };
 
