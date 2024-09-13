@@ -25,7 +25,7 @@ const Sidebar = () => {
       </div>
       <Menu mode="inline" selectedKeys={[location.pathname]}>
         <Menu.Item className='ant-menu-item-sidebar' key="/" icon={<DashboardOutlined />}>
-          <Link to="/">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
         <Menu.SubMenu key="cv-management" icon={<FileOutlined />} title="CV Management">
           <Menu.Item key="/approve-cv">

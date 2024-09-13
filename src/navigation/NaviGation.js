@@ -18,13 +18,13 @@ import ListFeature from "../features/ListManagement";
 import ConfirmCV from "../screens/ConfirmCV_data";
 import Dashboard from "../screens/Dashboard";
 
-//login
-import SignUp from '../components/SignUp/SignUp';
-import Login from '../components/Login/Login';
-import Home from '../components/Home';
-import ResetPassword from '../components/ResetPassword/ResetPassword';
-import OTPVerification from '../components/OTPVerification/OTPVerification'; // Import đúng
-import ResetPasswordPage from '../components/ResetPasswordPage/ResetPasswordPage';
+// //login
+// import SignUp from '../components/SignUp/SignUp';
+// import Login from '../components/Login/Login';
+// import Home from '../components/Home';
+// import ResetPassword from '../components/ResetPassword/ResetPassword';
+// import OTPVerification from '../components/OTPVerification/OTPVerification'; // Import đúng
+// import ResetPasswordPage from '../components/ResetPasswordPage/ResetPasswordPage';
 
 import "../assets/styles/NaviGation.css";
 
@@ -58,88 +58,81 @@ const Navigation = () => {
 
   return (
     <Router>
-      <Routes>
-        {/* Authentication Routes */}
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/otp-verification" element={<OTPVerification />} />
-        <Route path="/reset-password-page" element={<ResetPasswordPage />} />
-        
-        {/* Main Application Routes */}
-        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />} />
-        <Route path="*" element={
-          <div className="layout-container">
-            <div className="sidebar-container">
-              <Sidebar />
-            </div>
-            <div className="main-container">
-              <Routes>
-                <Route path="/group-list" element={<ListFeature />} />
-                <Route path="/intern-list" element={<ListFeature />} />
-                <Route path="/projectmanagement" element={
-                  <>
-                    <CustomHeader onAddNewProject={handleAddNewProject} />
-                    <FilterForm />
-                  </>
-                } />
-                <Route path="/positionmanagement" element={
-                  <>
-                    <CustomHeader />
-                    <Management />
-                  </>
-                } />
-                <Route path="/technology-management" element={
-                  <>
-                    <TechnologyHeader />
-                    <TechnologyContent />
-                  </>
-                } />
-                <Route path="/group-zalo-management" element={
-                  <>
-                    <HeaderZalo />
-                    <GroupZaloManagement />
-                  </>
-                } />
-                <Route path="/confirm-cv" element={
-                  <>
-                    <HeaderCV />
-                    <ConfirmCV />
-                  </>
-                } />
-                <Route path="/view-zalo/:groupId" element={
-                  <>
-                    <HeaderZalo />
-                    <ViewZalo />
-                  </>
-                } />
-                <Route path="/approve-cv" element={
-                  <>
-                    <HeaderInternList onScheduleInterview={handleScheduleInterview} />
-                    <InternList onSelectIntern={setSelectedInternId} />
-                  </>
-                } />
-                <Route path="/dashboard" element={
-                  <>
-                    <HeaderDashboard />  
-                    <Dashboard />
-                  </>
-                } />
-              </Routes>
-            </div>
-          </div>
-        } />
-      </Routes>
-      <AddNewProjectForm
-        visible={visible}
-        onCreate={handleCreate}
-        onCancel={() => setVisible(false)}
-      />
-      <ScheduleInterview
-        visible={isScheduleModalVisible}
-        onClose={() => setIsScheduleModalVisible(false)}
-        internId={selectedInternId}
-      />
+      <div className="layout-container">
+        <div className="sidebar-container">
+          <Sidebar />
+        </div>
+        <div className="main-container">
+          <Routes>
+            <Route path="/group-list" element={<ListFeature />} />
+            <Route path="/intern-list" element={<ListFeature />} />
+            <Route path="/projectmanagement" element={
+              <>
+                <CustomHeader onAddNewProject={handleAddNewProject} />
+                <FilterForm />
+              </>
+            } />
+            <Route path="/positionmanagement" element={
+              <>
+                <CustomHeader />
+                <Management />
+              </>
+            } />
+            <Route path="/technology-management" element={
+              <>
+                <TechnologyHeader />
+                <TechnologyContent />
+              </>
+            } />
+            <Route path="/group-zalo-management" element={
+              <>
+                <HeaderZalo />
+                <GroupZaloManagement />
+              </>
+            } />
+            <Route path="/confirm-cv" element={
+              <>
+                <HeaderCV />
+                <ConfirmCV />
+              </>
+            } />
+            <Route path="/view-zalo/:groupId" element={
+              <>
+                <HeaderZalo />
+                <ViewZalo />
+              </>
+            } />
+            <Route path="/approve-cv" element={
+              <>
+                <HeaderInternList onScheduleInterview={handleScheduleInterview} />
+                <InternList onSelectIntern={setSelectedInternId} />
+              </>
+            } />
+            <Route path="/dashboard" element={
+              <>
+                <HeaderDashboard />  
+                <Dashboard />
+              </>
+            } />
+            {/* <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/otp-verification" element={<OTPVerification />} />
+            <Route path="/reset-password-page" element={<ResetPasswordPage />} /> */}
+          </Routes>
+        </div>
+        <AddNewProjectForm
+          visible={visible}
+          onCreate={handleCreate}
+          onCancel={() => setVisible(false)}
+        />
+        <ScheduleInterview
+          visible={isScheduleModalVisible}
+          onClose={() => setIsScheduleModalVisible(false)}
+          internId={selectedInternId}
+        />
+      </div>
     </Router>
   );
 };
