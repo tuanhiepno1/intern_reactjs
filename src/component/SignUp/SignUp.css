@@ -147,8 +147,6 @@
     background-color: #0056b3;
 }
 
-/* Đoạn văn bản dưới form */
-
 /* Hình ảnh bên phải của form đăng ký */
 .sign-up-image {
     width: 150%;
@@ -170,11 +168,3 @@
     max-width: 10px;
 }
 
-.language-selector select {
-    margin-left: 10px;
-    padding: 40px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    width: 50px;
-}

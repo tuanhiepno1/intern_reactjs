@@ -82,7 +82,6 @@ const SignUp = () => {
 
     return (
         <div className="sign-up-container">
-            <LanguageSelector language={language} setLanguage={setLanguage} />
 
             <div className="sign-up-logo">
                 <img src={amazingTechLogo} alt="AmazingTech Logo" />
