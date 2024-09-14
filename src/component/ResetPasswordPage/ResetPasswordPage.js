@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Input, Button, Select, message } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import 'antd/dist/antd.css';
 import './ResetPasswordPage.css';
 import amazingTechLogo from '../../assets/AmazingTech.png';
 import illustration from '../../assets/image1.png';
+
+const { Option } = Select;
 
 const ResetPasswordPage = () => {
     const [newPassword, setNewPassword] = useState('');
@@ -22,8 +26,7 @@ const ResetPasswordPage = () => {
         }
     }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         setErrorMessage('');
 
         if (newPassword !== confirmPassword) {
@@ -44,7 +47,7 @@ const ResetPasswordPage = () => {
                     password: newPassword
                 });
 
-                alert('Password changed successfully!');
+                message.success('Password changed successfully!');
                 navigate('/login'); // Điều hướng về trang đăng nhập sau khi thành công
             } else {
                 setErrorMessage('User not found!');
@@ -57,44 +60,39 @@ const ResetPasswordPage = () => {
 
     return (
         <div className="reset-password-page">
-            <header className="reset-password-header">
+            <header className="reset-password-header-page">
                 <img src={amazingTechLogo} alt="AmazingTech Logo" className="reset-password-page-logo" />
-                <div className="language-selector">
-                    <select>
-                        <option value="en">EN</option>
-                        <option value="vi">VN</option>
-                    </select>
-                </div>
+                
             </header>
             <div className="reset-password-container">
                 <div className="reset-password-form">
                     <h2>Change Password</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group-RP">
-                            <label htmlFor="new-password">New Password *</label>
-                            <input
-                                id="new-password"
-                                type="password"
+                    <Form onFinish={handleSubmit}>
+                        <Form.Item className="reset-password-new-password"
+                            label="New Password *"
+                            rules={[{ required: true, message: 'Please input your new password!' }]}
+                        >
+                        </Form.Item>
+                        <Input.Password 
                                 placeholder="Enter new password"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
-                                required
                             />
-                        </div>
-                        <div className="form-group-RP">
-                            <label htmlFor="confirm-password">Confirm New Password *</label>
-                            <input
-                                id="confirm-password"
-                                type="password"
+                        <Form.Item className="reset-password-confirm-new-password"
+                            label="Confirm New Password *"
+                            rules={[{ required: true, message: 'Please confirm your password!' }]}
+                        >
+                        </Form.Item>
+                        <Input.Password 
                                 placeholder="Re-enter your password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
                             />
-                        </div>
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
-                        <button type="submit" className="reset-password-button">Change Password</button>
-                    </form>
+                        <Button type="primary" htmlType="submit" className="reset-password-button">
+                            Change Password
+                        </Button>
+                    </Form>
                 </div>
                 <div className="reset-password-illustration">
                     <img src={illustration} alt="Illustration" />

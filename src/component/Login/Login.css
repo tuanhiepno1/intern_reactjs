@@ -1,3 +1,4 @@
+/* Container chính của trang đăng nhập */
 .login-container {
     display: flex;
     align-items: center;
@@ -7,26 +8,22 @@
     position: relative;
 }
 
+/* Chọn ngôn ngữ */
 .language-selector {
     position: absolute;
     top: 20px;
     right: 20px;
 }
 
-.language-selector select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    position: absolute;
-    top: 10px;
-    right: -200px;
-    width: 50px;
+.language-selector .ant-select {
+    width: 120px;
 }
+
+/* Logo đăng nhập */
 .login-logo {
     position: absolute;
     top: 20px;
-    left: -150px;
+    left: -220px;
     width: 150px;
     height: 84px;
 }
@@ -35,102 +32,129 @@
     width: 150px;
     height: auto;
 }
-.login-image{
+
+/* Ảnh đăng nhập */
+.login-image {
     width: 200%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.navbar {
-    top: 150px;
+
+/* Navbar */
+.login-navbar {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ffffff;
 }
 
-.nav-button {
-    top: 80px;
+/* Nút điều hướng */
+.login-nav-button {
     background-color: transparent;
     border: none;
-    color: #999;
+    color: #3f3232;
     font-size: 16px;
     cursor: pointer;
     padding: 10px;
-    transition: color 0.3s, border-color 0.3s;
     position: relative;
 }
-.login-heading{
-    font-family: inter, sans-serif;
-    font-size: 35px;
-    top: 252px;
-    left: 262px;
-
-}
-.nav-button.active {
-    color: #007bff;
+.login-nav-button:hover .login-nav-button.active {
+    color: #00ccff; /* Màu chữ khi di chuột qua */
     font-weight: bold;
 }
-.form-instruction {
-    font-family: inter, sans-serif;
-    top: 300px;
+.login-nav-button.ant-btn {
+    border: none;
     font-size: 16px;
-    margin-bottom: 20px; /* Thêm khoảng cách nếu cần thiết */
 }
-.nav-button::after {
+
+.login-nav-button.active {
+    color: #00ccff;
+    font-weight: bold;
+}
+
+.login-nav-button.active::after {
     content: "";
     display: block;
-    width: 0;
+    width: 100%;
     height: 2px;
-    background: #007bff;
-    transition: width 0.3s;
+    background: #00ccff;
+    transition: width 0.01s ease; /* Thay đổi thời gian và kiểu chuyển tiếp */
     position: absolute;
-    bottom: -5px;
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.nav-button.active::after {
-    top: 55px;
-    width: 100%;
+/* Tiêu đề đăng nhập */
+.login-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    margin-top: 20px;
+    margin-left: 290px;
+    width: 200%;
+    margin-bottom: -3px;
+    border-color: none;
+    color: #0056b3;
 }
 
+/* Hướng dẫn form */
+.login-form-instruction {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Form đăng nhập */
 .login-form {
-    top: 150px;
-    background: #fcfdff;
+    background: #ffffff;
+    margin-right: 70px;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px rgba(0, 0, 0, 0.1);
-    margin-top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
-
-.form-group {
+.login-form .ant-form-item {
     margin-bottom: 15px;
     width: 100%;
 }
-
-.form-group label {
+.login-form .ant-form-item-label {
     margin-bottom: 5px;
 }
-
-.login-heading {
-    font-size: 40px; /* Điều chỉnh kích thước chữ nếu cần */
-    margin-top: 80px; /* Thay đổi giá trị này để điều chỉnh khoảng cách từ dòng chữ phía trên */
-    top: 90px;;
-    margin-bottom: -3px;
+/* Nhóm form */
+.login-form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
-.form-group input {
+
+.login-form-group label {
+    margin-bottom: 5px; /* Khoảng cách giữa nhãn và ô nhập */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #333; /* Màu chữ nhãn */
+}
+.ant-input, .ant-input-password {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dad7d7;
+    border-radius: 4px;
+}
+.login-form-group .ant-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #dad7d7;
     border-radius: 4px;
 }
 
-.button-group {
+/* Nhóm nút */
+.login-button-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -139,7 +163,8 @@
     align-items: center;
 }
 
-.options-container {
+/* Các tùy chọn */
+.login-options-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,63 +172,79 @@
     margin-bottom: 10px;
 }
 
-.remember-me {
-    font-family: inter, sans-serif;
+/* Nhớ tôi */
+.login-remember-me {
+    font-family: 'Inter', sans-serif;
     display: flex;
     align-items: center;
     font-size: 14px;
 }
 
-.forgot-password-link {
-    font-family: inter, sans-serif;
+/* Liên kết quên mật khẩu */
+.login-forgot-password-link {
+    font-family: 'Inter', sans-serif;
     color: #ff0000;
     text-decoration: none;
     font-size: 14px;
 }
 
-.forgot-password-link:hover {
+.login-forgot-password-link:hover {
     text-decoration: underline;
 }
 
-button {
+/* Nút đăng nhập */
+.login-button {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+    background-color: #0800ff;
+    color: white; /* Màu chữ */
+    border: none; /* Không có đường viền */
+    padding: 5px 5px; /* Padding của nút */
+    border-radius: 3px; /* Góc bo tròn của nút */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi di chuột qua */
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
+.login-button:hover {
     background-color: #0056b3;
 }
 
-button.signup-button {
-    background-color: #b4c8d9; 
+/* Nút đăng ký */
+.login-signup-button {
+    width: 100%;
+    background-color: #949494; /* Màu nền mới */
+    color: white; /* Màu chữ */
+    border: none; /* Không có đường viền */
+    padding: 5px 5px; /* Padding của nút */
+    border-radius: 3px; /* Góc bo tròn của nút */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi di chuột qua */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền khi di chuột qua */
 }
 
-button.signup-button:hover {
-    background-color: #5a5c68;
+.login-signup-button:hover {
+    background-color: #1270c3; /* Màu nền khi di chuột qua */
 }
 
+/* Đoạn văn */
 p {
     text-align: center;
-    margin: 20px 0; 
+    margin: 20px 0;
 }
 
-.or-login-with {
-    font-family: inter, sans-serif;
+/* Hoặc đăng nhập với */
+.login.or-login-with {
+    font-family: 'Inter', sans-serif;
     margin: 15px;
     font-size: 14px;
     color: #666;
     text-align: center;
 }
 
+/* Đăng nhập với Google */
 .google-login {
-    width: 320px; /* Đặt chiều rộng bằng với nút Login */
-    padding: 10px; /* Điều chỉnh padding nếu cần */
+    width: 320px;
+    padding: 10px;
     background-color: #ffffff;
     border: 1px solid #dad7d7;
     border-radius: 4px;
@@ -226,6 +267,8 @@ p {
 .google-login:hover {
     background-color: #f0f0f0;
 }
+
+/* Đặt font cho body */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;

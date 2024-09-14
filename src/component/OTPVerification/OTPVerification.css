@@ -1,4 +1,3 @@
-
 .otp-verification-page {
     font-family: Arial, sans-serif;
     color: #333;
@@ -11,64 +10,61 @@
 .otp-verification-header {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    background-color: #f5f5f5;
+    width: 200%;
+    background-color: #ffffff;
+    padding: 20px;
+    position: relative;
 }
 
 .otp-verification-logo {
-    position: absolute;
-    top: 20px;
-    left: 120px;
     width: 150px;
     height: 50px;
-}
-.otp-verification-image{
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.language-selector {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: -100px;
+    left: 50px;
 }
 
-.language-selector select {
-    font-size: 16px;
-    padding: 5px;
+.language-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .otp-verification-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 800px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .otp-verification-form {
     background: #fcfdff;
+    margin-left: -200px;
     padding: 40px;
     border-radius: 8px;
-    width: 600px;
-    margin-right: 100px;
+    width: 150%;
+    max-width: 600px;
+    margin-right: 200px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     align-items: flex-start;
 }
 
 .otp-verification-form h2 {
     color: #363cdd;
-    margin-top: 0;
+    margin-left: 100px;
 }
 
-p {
-    text-align: center;
+.form-otp-verification {
+    width: 100%;
+}
+
+.otp-verification-form p {
+    margin-left: 200px;
     margin: 20px 0;
-    font-size: 14px;
+    font-size: 11px;
 }
 
 .form-group-OTP {
@@ -78,17 +74,14 @@ p {
 }
 
 .form-group-OTP input {
-    width: 40px;
-    height: 40px;
+    margin-top: 50px;
+    width: 50px;
+    height: 50px;
     text-align: center;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-right: 10px;
-}
-
-.form-group-OTP input:last-child {
-    margin-right: 0;
 }
 
 .error-message {
@@ -98,18 +91,10 @@ p {
 
 .otp-footer {
     display: flex;
-    flex-direction: column;
+    flex-direction:row;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
-}
-
-.timer-and-resend {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    margin-bottom: 10px;
 }
 
 .timer {
@@ -121,7 +106,8 @@ p {
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
 }
 
 .resend-otp-link:hover {
@@ -129,28 +115,34 @@ p {
 }
 
 .otp-verification-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+    margin-top: 20px;
+    line-height: 15px;
+    width: 150%;
+    background-color: #1900f6; /* Màu nền mới */
+    color: white; /* Màu chữ */
+    border: none; /* Không có đường viền */
+    padding: 5px 5px; /* Padding của nút */
+    border-radius: 3px; /* Góc bo tròn của nút */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi di chuột qua */
+    transition: background-color 0.3s ease;
 }
 
 .otp-verification-button:hover {
     background-color: #0056b3;
 }
 
-.otp-verification-illustration {
+.otp-verification-image {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     padding: 20px;
 }
 
-.otp-verification-illustration img {
-    width: 100%;
+.otp-verification-image img {
+    max-width: 200%;
+    margin-left: 200px;
     height: auto;
     border-radius: 8px;
 }

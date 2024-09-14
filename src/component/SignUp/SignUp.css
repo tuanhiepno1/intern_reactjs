@@ -1,21 +1,31 @@
-body {
+/* Đặt font chữ cho toàn bộ trang */
+.sign-up-body {
     font-family: 'Inter', sans-serif;
-}
-.sign-up-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #fcfdff; /* Background color of the container */
-    position: relative;
+    height: 100%;
+    margin: 0;
+    overflow-y: auto; /* Đảm bảo thanh cuộn dọc hoạt động */
 }
 
+/* Container chính cho trang đăng ký */
+.sign-up-container {
+    display: flex;
+    align-items:center;
+    justify-content:baseline;
+    min-height: 110vh; /* Thay đổi từ 100vh nếu cần thêm chiều cao */
+    background-color: #fcfdff;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Đảm bảo padding không làm tràn trang */
+}
+
+/* Logo hiển thị bên trái của trang đăng ký */
 .sign-up-logo {
-        position: absolute;
-        top: 20px;
-        left: -200px;
-        width: 150px;
-        height: 84px;
+    position: absolute;
+    top: 50px;
+    left: -80px;
+    width: 150px;
+    height: 84px;
 }
 
 .sign-up-logo img {
@@ -23,130 +33,148 @@ body {
     height: auto;
 }
 
-/* Style for the Sign Up heading within login-form */
-.sign-up-heading {
-    font-size: 40px;
-    color: #4dddf4;
-    text-align: center;
-    margin-bottom: 30px; /* Increased space to move heading down */
-}
-.login-heading {
-    font-size: 40px;
-    color: #4dddf4;
-    text-align: center;
-    margin-bottom: 30px; /* Khoảng cách tăng lên để di chuyển tiêu đề xuống */
-}
-/* CSS for the navigation bar within login-form */
-.navbar {
+/* Thanh navbar chứa các mục vai trò */
+.sign-up-navbar {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px; /* Space between roles and form */
-    border-bottom: 1px solid #ddd; /* Optional: To add a bottom border similar to the one in your image */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #666666;
 }
-
-.nav-button {
-    background-color: transparent;
-    border: none;
-    color: #999; /* Default color for non-active buttons */
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px;
-    transition: color 0.3s, border-color 0.3s;
-    position: relative; /* To position the underline */
+.sign-up-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    margin-top: 20px;
+    margin-left: 650px;
+    width: 200%;
+    margin-bottom: -3px;
+    border-color: none;
+    color: #0056b3;
 }
-
-.nav-button.active {
-    color: #007bff; /* Active text color */
-    font-weight: bold; /* Bold active text */
+.sign-up-form p {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 100px; /* Thay đổi giá trị theo nhu cầu */
 }
-
-.nav-button::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #007bff; /* Underline color */
-    transition: width 0.3s;
-    position: absolute;
-    bottom: -5px; /* Position underline just below the button */
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nav-button.active::after {
-    width: 100%; /* Full width for active button */
-}
-
+/* Form đăng ký */
 .sign-up-form {
     background: #fcfdff;
-    padding: 40px; /* Increased padding to move content down */
+    margin-left: 70px;
+    padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
-    width: 420px;
-    /*margin-top: 200px; /* Adjust space to align with other elements */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box; /* Đảm bảo padding không làm tràn form */
 }
-
-.form-group label {
-    margin-bottom: 5px;
+.sign-up-form .ant-form-item {
+    margin-bottom: 3px;
+    width: 100%;
 }
-
-.form-group {
+.sign-up-form .ant-form-item-label {
+    margin-bottom: 2px;
+}
+.sign-up-form-group {
     margin-bottom: 15px;
-    width: 100%; /* Ensure input fields take full width */
-}
-
-.form-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #dad7d7;
+    display: flex;
+    flex-direction:column;
+}
+.sign-up-form-group label {
+    margin-left: px;
+    margin-bottom: 1px; /* Khoảng cách giữa nhãn và ô nhập */
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #000000; /* Màu chữ nhãn */
+}
+.sign-up-container .sign-up-ant-email{
+    width: 150%; /* Chiếm toàn bộ chiều rộng của phần tử chứa */
+    padding: 10px; /* Padding của ô nhập */
+    border: 1px solid #d2d1d1;
     border-radius: 4px;
 }
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
+.sign-up-container .sign-up-ant-input {
+    width: 150%; /* Chiếm toàn bộ chiều rộng của phần tử chứa */
+    padding: 10px; /* Padding của ô nhập */
+    border: 1px solid #d2d1d1;
     border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+}
+ 
+.sign-up-container .sign-up-ant-password{
+    width: 150%;
+    padding: 10px;
+    border: 1px solid #a3a2a2;
+    border-radius: 4px;
+}
+.sign-up-container .sign-up-ant-name-school{
+    width: 150%;
+    padding: 10px;
+    border: 1px solid #a3a2a2;
+    border-radius: 4px;
+}
+.sign-up-container .sign-up-ant-school
+{
+    width: 150%;
+    padding: 10px;
+    border: 1px solid #a3a2a2;
+    border-radius: 4px;
+}
+.sign-up-container .sign-up-ant-id-student{
+    width: 150%;
+    padding: 10px;
+    border: 1px solid #a3a2a2;
+    border-radius: 4px;
+}
+/*nút đăng ký*/
+.sign-up-button {
+    margin-top: 20px;
+    line-height: 15px;
+    width: 150%;
+    background-color: #1900f6; /* Màu nền mới */
+    color: white; /* Màu chữ */
+    border: none; /* Không có đường viền */
+    padding: 5px 5px; /* Padding của nút */
+    border-radius: 3px; /* Góc bo tròn của nút */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi di chuột qua */
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
+.sign-up-button:hover {
     background-color: #0056b3;
 }
 
-p {
-    text-align: center;
-    margin-top: 20px; /* Increased margin to move text down */
-}
+/* Đoạn văn bản dưới form */
 
+/* Hình ảnh bên phải của form đăng ký */
 .sign-up-image {
-    width: 50%;
+    width: 150%;
+    margin-left: 100px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CSS for language selector */
+.sign-up-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Bộ chọn ngôn ngữ */
 .language-selector {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    margin-top: 40px;
+    max-width: 10px;
 }
 
 .language-selector select {
-    padding: 5px;
+    margin-left: 10px;
+    padding: 40px;
     border-radius: 4px;
     border: 1px solid #ccc;
     background-color: #fff;
-    position: absolute;
-    top: 10px;
-    right: -200px;
     width: 50px;
 }
