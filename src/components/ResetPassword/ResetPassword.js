@@ -1,76 +1,121 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Button, Input, Form, Dropdown, Menu, message } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { useNavigate } from 'react-router-dom';
-import './ResetPassword.css';
-import amazingTechLogo from '../../assets/AmazingTech.png';
-import illustration from '../../assets/image1.png';
+import axios from 'axios';
+import "./ResetPassword.css";
 
 const ResetPassword = () => {
-    const [email, setEmail] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
+  const [language, setLanguage] = useState("en");
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMessage('');
+  const handleLanguageChange = ({ key }) => {
+    setLanguage(key);
+  };
 
-        try {
-            const response = await axios.get('https://66c3f496b026f3cc6ced9351.mockapi.io/user');
-            const users = response.data;
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.get('https://66c3f496b026f3cc6ced9351.mockapi.io/user');
+      const users = response.data;
+      const userExists = users.some(user => user.email === values.email);
 
-            const userExists = users.some(user => user.email === email);
+      if (userExists) {
+        navigate('/otp-verification', { state: { email: values.email } });
+      } else {
+        message.error('Email not found. Please check your email address.');
+      }
+    } catch (error) {
+      console.error('Error checking email:', error);
+      message.error('An error occurred. Please try again later.');
+    }
+  };
 
-            if (userExists) {
-                // Lưu email vào localStorage
-                localStorage.setItem('resetEmail', email);
-                alert(`Sent a password reset request to ${email}`);
-                navigate('/otp-verification'); // Điều hướng tới trang thay đổi mật khẩu
-            } else {
-                setErrorMessage('Email does not exist!!');
-            }
-        } catch (error) {
-            console.error('An error occurred when checking the email:', error);
-            setErrorMessage('An error occurred. Please try again later.');
-        }
-    };
+  const languageMenu = (
+    <Menu onClick={handleLanguageChange}>
+      <Menu.Item key="en">
+        <img
+          src="/assets/login/flag-en.png"
+          alt="English"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        English
+      </Menu.Item>
+      <Menu.Item key="vi">
+        <img
+          src="/assets/login/flag-vi.png"
+          alt="Tiếng Việt"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        Tiếng Việt
+      </Menu.Item>
+    </Menu>
+  );
 
-    return (
-        <div className="reset-password-page">
-            <header className="reset-password-header">
-                <img src={amazingTechLogo} alt="AmazingTech Logo" className="reset-password-logo" />
-                <div className="language-selector">
-                    <select>
-                        <option value="en">EN</option>
-                        <option value="vi">VN</option>
-                    </select>
-                </div>
-            </header>
-            <div className="reset-password-container">
-                <div className="reset-password-form">
-                    <h2>Reset Your Password</h2>
-                    <p>Please provide the email address that you used when you signed up for your account.</p>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group-RP">
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="youremail@example.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
-                        {errorMessage && <p className="error-message">{errorMessage}</p>}
-                        <p>We will send you an email that will allow you to reset your password.</p>
-                        <button type="submit" className="reset-password-button">Reset password</button>
-                    </form>
-                </div>
-                <div className="reset-password-illustration">
-                    <img src={illustration} alt="Illustration" />
-                </div>
-            </div>
+  return (
+    <div className="login-page">
+      <header className="login-header">
+        <div className="logo">
+          <img src="/assets/login/AmazingTech.png" alt="Amazing Tech Logo" />
         </div>
-    );
+        <div className="language-selector">
+          <Dropdown overlay={languageMenu} trigger={["click"]}>
+            <Button>
+              <img
+                src={`/assets/login/flag-${language}.png`}
+                alt={language === "en" ? "English" : "Tiếng Việt"}
+                style={{ marginRight: 8, width: 30, height: 20 }}
+              />
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
+      </header>
+
+      <div className="reset-password-container">
+        <div className="reset-password-form">
+          <h1 className="reset-password-title">Reset Your Password</h1>
+          <p className="reset-password-instruction">
+            Please provide the email address that you used when you signed up
+            for your account.
+          </p>
+          <Form className="reset-password-form" name="reset_password" onFinish={onFinish} layout="vertical">
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!",
+                },
+                {
+                  required: true,
+                  message: "Please input your E-mail!",
+                },
+              ]}
+            >
+              <Input className="reset-password-input" placeholder="youremail@example.com" />
+            </Form.Item>
+            <p className="reset-password-note">
+              We will send you an email that will allow you to reset your
+              password.
+            </p>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="reset-password-button"
+              >
+                Reset password
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+
+        <div className="login-banner">
+          <img src="/assets/login/image1.png" alt="Login Banner" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ResetPassword;

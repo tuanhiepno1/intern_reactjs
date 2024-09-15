@@ -33,7 +33,7 @@ function ListManagementFeature() {
         backgroundColor: '#fff',
         borderRadius: '34px',
         padding: '24px',
-        margin: '20px',
+        margin: '20px 60px',
     };
 
     const handleStatusChange = (key, newStatus) => {

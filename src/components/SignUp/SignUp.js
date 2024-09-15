@@ -1,178 +1,159 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import axios from 'axios';
-import './SignUp.css';  
-import image1 from '../../assets/image1.png';
-import amazingTechLogo from '../../assets/AmazingTech.png';
-import LanguageSelector from '../Login/LanguageSelector'; // Import LanguageSelector
+import { Button, Input, Form, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import './SignUp.css';
 
-const SignUp = () => {  
-    const navigate = useNavigate();  // Khởi tạo useNavigate
-
+const SignUp = () => {
     const [role, setRole] = useState('Admin');
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        fullName: '',
-        additionalInfo: {}
-    });
-    const [language, setLanguage] = useState('en'); // Thêm state để quản lý ngôn ngữ
+    const [language, setLanguage] = useState('en');
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+    const handleRoleChange = (newRole) => {
+        setRole(newRole);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleLanguageChange = ({ key }) => {
+        setLanguage(key);
+    };
 
-        let additionalInfo = {};
+    const languageMenu = (
+        <Menu onClick={handleLanguageChange}>
+            <Menu.Item key="en">
+                <img src="/assets/login/flag-en.png" alt="English" style={{ marginRight: 8, width: 30, height: 20 }} />
+                English
+            </Menu.Item>
+            <Menu.Item key="vi">
+                <img src="/assets/login/flag-vi.png" alt="Tiếng Việt" style={{ marginRight: 8, width:30, height: 20 }} />
+                Tiếng Việt
+            </Menu.Item>
+        </Menu>
+    );
+
+    const renderFormItems = () => {
         if (role === 'Intern') {
-            additionalInfo = {
-                studentId: formData.studentId,
-                schoolName: formData.school,
-                major: formData.major || ""
-            };
-        } else if (role === 'School') {
-            additionalInfo = {
-                schoolName: formData.schoolName
-            };
-        } else if (role === 'Human Resources') {
-            additionalInfo = {
-                department: formData.department || "",
-                yearsOfExperience: formData.yearsOfExperience || 0
-            };
-        } else if (role === 'Mentor') {
-            additionalInfo = {
-                expertise: formData.expertise || "",
-                menteesCount: formData.menteesCount || 0
-            };
-        }
-
-        const data = {
-            email: formData.email,
-            password: formData.password,
-            role: role,
-            fullName: formData.fullName,
-            additionalInfo: additionalInfo
-        };
-
-        try {
-            const response = await axios.post('https://66c3f496b026f3cc6ced9351.mockapi.io/user', data);
-            console.log('Successful registration:', response.data);
-            alert('Successful registration');
-        } catch (error) {
-            console.error('Registration failed:', error);
-            alert('Registration failed');
+            return (
+                <>
+                    <Form.Item 
+                        label="Full Name" 
+                        name="fullName" 
+                        rules={[{ required: true, message: 'Please input your full name!' }]}
+                    >
+                        <Input className="input-name" placeholder="Enter your full name" />
+                    </Form.Item>
+                    <Form.Item 
+                        label="Student's ID" 
+                        name="studentId" 
+                        rules={[{ required: true, message: "Please input your student's ID!" }]}
+                    >
+                        <Input className="input-student-id" placeholder="Enter your student's ID" />
+                    </Form.Item>
+                    <Form.Item 
+                        label="School" 
+                        name="school" 
+                        rules={[{ required: true, message: 'Please input your school!' }]}
+                    >
+                        <Input className="input-school" placeholder="Enter your school" />
+                    </Form.Item>
+                </>
+            );
+        } else {
+            return (
+                <Form.Item 
+                    label={role === 'School' ? 'School Name' : 'Full Name'} 
+                    name={role === 'School' ? 'schoolName' : 'fullName'} 
+                    rules={[{ required: true, message: `Please input your ${role === 'School' ? 'school name' : 'full name'}!` }]}
+                >
+                    <Input 
+                        className="input-name" 
+                        placeholder={`Enter your ${role === 'School' ? 'school name' : 'full name'}`} 
+                    />
+                </Form.Item>
+            );
         }
     };
 
     return (
-        <div className="sign-up-container">
-            <LanguageSelector language={language} setLanguage={setLanguage} /> {/* Sử dụng LanguageSelector */}
-
-            <div className="sign-up-logo">
-                <img src={amazingTechLogo} alt="AmazingTech Logo" />
-            </div>
-
-            <div className="sign-up-form">
-                <div className="navbar">
-                    {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
-                        <button
-                            key={roleName}
-                            className={`nav-button ${role === roleName ? 'active' : ''}`}
-                            onClick={() => setRole(roleName)}
-                        >
-                            {roleName}
-                        </button>
-                    ))}
+        <div className="login-page">
+            <header className="login-header">
+                <div className="logo">
+                    <img src="/assets/login/AmazingTech.png" alt="Amazing Tech Logo" />
                 </div>
-                <h2 className="login-heading">Sign Up</h2>
-
-                <p>Please fill in your details to create your account.</p>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="full-name">Full Name</label>
-                        <input 
-                            id="full-name" 
-                            type="text" 
-                            placeholder="Enter your full name" 
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {role === 'Intern' && (
-                        <>
-                            <div className="form-group">
-                                <label htmlFor="student-id">Student's ID</label>
-                                <input 
-                                    id="student-id" 
-                                    type="text" 
-                                    placeholder="Enter your Student's ID" 
-                                    name="studentId"
-                                    value={formData.studentId || ''}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="school">School</label>
-                                <input 
-                                    id="school" 
-                                    type="text" 
-                                    placeholder="Enter your school name" 
-                                    name="school"
-                                    value={formData.school || ''}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                        </>
-                    )}
-                    {role === 'School' && (
-                        <div className="form-group">
-                            <label htmlFor="school-name">School Name</label>
-                            <input 
-                                id="school-name" 
-                                type="text" 
-                                placeholder="Enter your school name" 
-                                name="schoolName"
-                                value={formData.schoolName || ''}
-                                onChange={handleChange}
+                <div className="language-selector">
+                    <Dropdown overlay={languageMenu} trigger={['click']}>
+                        <Button>
+                            <img 
+                                src={`/assets/login/flag-${language}.png`} 
+                                alt={language === 'en' ? 'English' : 'Tiếng Việt'} 
+                                style={{ marginRight: 8, width: 30, height: 20 }}
                             />
-                        </div>
-                    )}
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input 
-                            id="email" 
-                            type="email" 
-                            placeholder="youremail@example.com" 
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
+                             <DownOutlined />
+                        </Button>
+                    </Dropdown>
+                </div>
+            </header>
+            
+            <div className="login-content">
+                <div className="login-form-container">
+                    <div className="role-selector">
+                        {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
+                            <Button
+                                key={roleName}
+                                className={`role-button ${role === roleName ? 'active' : ''}`}
+                                onClick={() => handleRoleChange(roleName)}
+                            >
+                                {roleName}
+                            </Button>
+                        ))}
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            id="password" 
-                            type="password" 
-                            placeholder="Password" 
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
+                    
+                    <div className="login-form">
+                        <h2>Sign Up</h2>
+                        <p>Please fill your details to create an account.</p>
+                        <Form className="form-signup" layout="vertical">
+                            {renderFormItems()}
+                            <Form.Item 
+                                label="Email" 
+                                name="email" 
+                                rules={[{ required: true, type: 'email', message: 'Please input a valid email!' }]}
+                            >
+                                <Input className="input-email" placeholder="youremail@example.com" />
+                            </Form.Item>
+                            <Form.Item 
+                                label="Password" 
+                                name="password"
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                            >
+                                <Input.Password className="input-password" placeholder="Enter your password" />
+                            </Form.Item>
+                            <Form.Item 
+                                label="Re-type Password" 
+                                name="confirmPassword"
+                                dependencies={['password']}
+                                rules={[
+                                    { required: true, message: 'Please confirm your password!' },
+                                    ({ getFieldValue }) => ({
+                                        validator(_, value) {
+                                            if (!value || getFieldValue('password') === value) {
+                                                return Promise.resolve();
+                                            }
+                                            return Promise.reject(new Error('The two passwords do not match!'));
+                                        },
+                                    }),
+                                ]}
+                            >
+                                <Input.Password className="input-password" placeholder="Re-enter your password" />
+                            </Form.Item>
+                            <Button className="sign-up-button-signup" type="primary" htmlType="submit" block>Sign up</Button>
+                            <div className="login-link">
+                                Already have an account? <Link to="/login">Sign in</Link>
+                            </div>
+                        </Form>
                     </div>
-                    <button type="submit">Sign Up</button>
-                </form>
-                <p>Already have an account? <button onClick={() => navigate('/login')} className="link-button">Sign in</button></p>  {/* Thêm sự kiện click để chuyển hướng */}
-            </div>
-
-            <div className="sign-up-image">
-                <img src={image1} alt="Sign Up Illustration" />
+                </div>
+                
+                <div className="login-banner">
+                    <img src="/assets/login/image1.png" alt="Login Banner" />
+                </div>
             </div>
         </div>
     );

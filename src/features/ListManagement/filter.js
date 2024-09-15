@@ -12,7 +12,7 @@ function Filter({ data }) {
     const uniqueValues = (key) => [...new Set(data.map(item => item[key]))];
 
     return (
-        <div className="input-check" style={{ width: "1500px" }}>
+        <div className="input-check" >
             <div className="input-fields">
                 <Row gutter={12}>
                     <Col span={8}>

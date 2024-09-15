@@ -1,233 +1,120 @@
-.login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #fcfdff;
-    position: relative;
-}
-
-.language-selector {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.language-selector select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    position: absolute;
-    top: 10px;
-    right: -200px;
-    width: 50px;
-}
-.login-logo {
-    position: absolute;
-    top: 20px;
-    left: -150px;
-    width: 150px;
-    height: 84px;
-}
-
-.login-logo img {
-    width: 150px;
-    height: auto;
-}
-.login-image{
-    width: 200%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.navbar {
-    top: 150px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ffffff;
-}
-
-.nav-button {
-    top: 80px;
-    background-color: transparent;
-    border: none;
-    color: #999;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px;
-    transition: color 0.3s, border-color 0.3s;
-    position: relative;
-}
-.login-heading{
-    font-family: inter, sans-serif;
-    font-size: 35px;
-    top: 252px;
-    left: 262px;
-
-}
-.nav-button.active {
-    color: #007bff;
-    font-weight: bold;
-}
-.form-instruction {
-    font-family: inter, sans-serif;
-    top: 300px;
-    font-size: 16px;
-    margin-bottom: 20px; /* Thêm khoảng cách nếu cần thiết */
-}
-.nav-button::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #007bff;
-    transition: width 0.3s;
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nav-button.active::after {
-    top: 55px;
-    width: 100%;
-}
-
-.login-form {
-    top: 150px;
-    background: #fcfdff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
-    margin-top: 0;
+.login-page {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    min-height: 100vh;
 }
 
-.form-group {
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-.form-group label {
-    margin-bottom: 5px;
-}
-
-.login-heading {
-    font-size: 40px; /* Điều chỉnh kích thước chữ nếu cần */
-    margin-top: 80px; /* Thay đổi giá trị này để điều chỉnh khoảng cách từ dòng chữ phía trên */
-    top: 90px;;
-    margin-bottom: -3px;
-}
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #dad7d7;
-    border-radius: 4px;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-}
-
-.options-container {
+.login-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
+    padding: 20px 60px;
 }
 
-.remember-me {
-    font-family: inter, sans-serif;
+.login-content {
     display: flex;
+    flex: 1;
+    margin-top: 50px;
+}
+
+.login-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    font-size: 14px;
 }
-
-.forgot-password-link {
-    font-family: inter, sans-serif;
-    color: #ff0000;
-    text-decoration: none;
-    font-size: 14px;
+.login-form h2{
+    font-size: 40px;
+    font-weight: 600;
+    color: #4889E9;
 }
-
-.forgot-password-link:hover {
-    text-decoration: underline;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: white;
+.login-form p{
     font-size: 16px;
-    cursor: pointer;
+    color: #888;
 }
 
-button:hover {
-    background-color: #0056b3;
+.role-selector {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 40px;
 }
 
-button.signup-button {
-    background-color: #b4c8d9; 
+.role-button {
+    background: none;
+    border: none;
+    padding: 10px;
 }
 
-button.signup-button:hover {
-    background-color: #5a5c68;
+.role-button.active {
+    color: #1890ff;
+    border-bottom: 2px solid #1890ff;
 }
 
-p {
+.login-form {
+    max-width: 400px;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.or-divider {
     text-align: center;
-    margin: 20px 0; 
-}
-
-.or-login-with {
-    font-family: inter, sans-serif;
-    margin: 15px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
+    margin: 20px 0;
+    color: #888;
 }
 
 .google-login {
-    width: 320px; /* Đặt chiều rộng bằng với nút Login */
-    padding: 10px; /* Điều chỉnh padding nếu cần */
-    background-color: #ffffff;
-    border: 1px solid #dad7d7;
-    border-radius: 4px;
-    color: #000000;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    height: 40px;
 }
 
 .google-login img {
     margin-right: 10px;
-    height: 24px;
 }
 
-.google-login:hover {
-    background-color: #f0f0f0;
+.login-banner {
+    flex: 1;
+
 }
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333;
+
+.login-banner img {
+    width: 90%;
+}
+
+.sign-in-button{
+    height: 40px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+.sign-up-button{
+    height: 40px;
+    width: 300px;
+    background-color: #EFF4FB;
+}
+.google-login{
+    height: 50px;
+    width: 300px;
+}
+.google-login img{
+    width: 20px;
+}
+.input-email{
+    height: 40px;
+}
+.input-password{
+    height: 40px;
+}
+.form-login{
+    margin-top: 50px;
+}
+.input-name,
+.input-student-id,
+.input-school,
+.input-email,
+.input-password {
+    height: 40px;
 }

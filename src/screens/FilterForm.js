@@ -78,6 +78,7 @@ const FilterForm = () => {
 
   return (
     <Form
+      className="filter-form-container"
       layout="vertical"
       onFinish={onFinish}
       style={{ backgroundColor: "#fff", borderRadius: "34px" }}

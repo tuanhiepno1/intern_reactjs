@@ -1,173 +1,132 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import "./Login.css";
-import image1 from "../../assets/image1.png";
-import amazingTechLogo from "../../assets/AmazingTech.png";
-import googleLogo from "../../assets/google-logo.png";
-import LanguageSelector from "./LanguageSelector"; // Import LanguageSelector
+import React, { useState } from 'react';
+import { Button, Input, Form, Checkbox, Dropdown, Menu, message } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import './Login.css';
 
 const Login = () => {
-  const [role, setRole] = useState("Admin");
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [loginMessage, setLoginMessage] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [language, setLanguage] = useState("en"); // Trạng thái ngôn ngữ
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [role, setRole] = useState('Admin');
+    const [language, setLanguage] = useState('en');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    const handleRoleChange = (newRole) => {
+        setRole(newRole);
+    };
 
-  const handleRememberMeChange = (e) => {
-    setRememberMe(e.target.checked);
-  };
+    const handleLanguageChange = ({ key }) => {
+        setLanguage(key);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const languageMenu = (
+        <Menu onClick={handleLanguageChange}>
+            <Menu.Item key="en">
+                <img src="/assets/login/flag-en.png" alt="English" style={{ marginRight: 8, width: 30, height: 20 }} />
+                English
+            </Menu.Item>
+            <Menu.Item key="vi">
+                <img src="/assets/login/flag-vi.png" alt="Tiếng Việt" style={{ marginRight: 8, width:30, height: 20 }} />
+                Tiếng Việt
+            </Menu.Item>
+        </Menu>
+    );
 
-    try {
-      const response = await axios.get(
-        "https://66c3f496b026f3cc6ced9351.mockapi.io/user"
-      );
-      const users = response.data;
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
 
-      const user = users.find(
-        (user) =>
-          user.email === formData.email &&
-          user.password === formData.password &&
-          user.role === role
-      );
+    const onFinish = async (values) => {
+        try {
+            const response = await axios.get('https://66c3f496b026f3cc6ced9351.mockapi.io/user');
+            const users = response.data;
+            const user = users.find(u => u.email === values.email && u.password === values.password);
 
-      if (user) {
-        console.log("Login Successfully:", user);
-        alert("Login Successfully");
-      } else {
-        console.error("Login failure: Invalid credentials or role");
-        alert("Login failure: Invalid credentials or role");
-      }
-    } catch (error) {
-      console.error("Login failure:", error);
-      alert("Login failure");
-    }
-  };
+            if (user && user.role === role) {
+                message.success('Login successful!');
+                navigate('/dashboard');
+            } else if (user && user.role !== role) {
+                message.error('Incorrect role selected. Please choose the correct role.');
+            } else {
+                message.error('Invalid email or password.');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            message.error('An error occurred. Please try again later.');
+        }
+    };
 
-  const handleSignUp = () => {
-    navigate("/signup");
-  };
-
-  const handleForgotPassword = () => {
-    navigate("/reset-password");
-  };
-
-  const handleRoleChange = (roleName) => {
-    setRole(roleName);
-    setLoginMessage(`Login ${roleName}`);
-  };
-
-  const handleGoogleLogin = () => {
-    window.open("https://accounts.google.com/o/oauth2/auth", "_blank");
-  };
-
-  return (
-    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
-      <div className="login-container">
-        <LanguageSelector language={language} setLanguage={setLanguage} />{" "}
-        {/* Sử dụng LanguageSelector */}
-        <div className="login-logo">
-          <img src={amazingTechLogo} alt="AmazingTech Logo" />
-        </div>
-        <div className="login-form">
-          <div className="navbar">
-            {["Admin", "Human Resources", "Mentor", "School", "Intern"].map(
-              (roleName) => (
-                <button
-                  key={roleName}
-                  className={`nav-button ${role === roleName ? "active" : ""}`}
-                  onClick={() => handleRoleChange(roleName)}
-                >
-                  {roleName}
-                </button>
-              )
-            )}
-          </div>
-          <h2 className="login-heading">{loginMessage || "Login Admin"}</h2>
-          <form onSubmit={handleSubmit}>
-            <p className="form-instruction">
-              Please fill your detail to access your account.
-            </p>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="youremail@example.com"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
+    return (
+        <div className="login-page">
+            <header className="login-header">
+                <div className="logo">
+                    <img src="/assets/login/AmazingTech.png" alt="Amazing Tech Logo" />
+                </div>
+                <div className="language-selector">
+                    <Dropdown overlay={languageMenu} trigger={['click']}>
+                        <Button>
+                            <img 
+                                src={`/assets/login/flag-${language}.png`} 
+                                alt={language === 'en' ? 'English' : 'Tiếng Việt'} 
+                                style={{ marginRight: 8, width: 30, height: 20 }}
+                            />
+                             <DownOutlined />
+                        </Button>
+                    </Dropdown>
+                </div>
+            </header>
+            
+            <div className="login-content">
+                <div className="login-form-container">
+                    <div className="role-selector">
+                        {['Admin', 'Human Resources', 'Mentor', 'School', 'Intern'].map((roleName) => (
+                            <Button
+                                key={roleName}
+                                className={`role-button ${role === roleName ? 'active' : ''}`}
+                                onClick={() => handleRoleChange(roleName)}
+                            >
+                                {roleName}
+                            </Button>
+                        ))}
+                    </div>
+                    
+                    <div className="login-form">
+                        <h2>{role} Login</h2>
+                        <p>Please fill your detail to access your account.</p>
+                        <Form className="form-login" layout="vertical" onFinish={onFinish}>
+                            <Form.Item 
+                                label="Email" 
+                                name="email"
+                                rules={[{ required: true, message: 'Please input your email!' }]}
+                            >
+                                <Input className="input-email" placeholder="youremail@example.com" />
+                            </Form.Item>
+                            <Form.Item 
+                                label="Password" 
+                                name="password"
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                            >
+                                <Input.Password className="input-password" placeholder="Enter your password" />
+                            </Form.Item>
+                            <div className="form-options">
+                                <Checkbox>Remember Me</Checkbox>
+                                <Link to="/reset-password">Forgot Password?</Link>
+                            </div>
+                            <Button className="sign-in-button" type="primary" htmlType="submit" block>Sign in</Button>
+                            <Button className="sign-up-button" block onClick={handleSignUp}>Sign up</Button>
+                            <div className="or-divider">OR LOGIN WITH</div>
+                            <Button className="google-login" block>
+                                <img src="/assets/login/google.png" alt="Google" /> Google
+                            </Button>
+                        </Form>
+                    </div>
+                </div>
+                
+                <div className="login-banner">
+                    <img src="/assets/login/image1.png" alt="Login Banner" />
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="button-group">
-              <div className="options-container">
-                <label className="remember-me">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={handleRememberMeChange}
-                  />
-                  Remember Me
-                </label>
-                <a
-                  href="#forgot-password"
-                  className="forgot-password-link"
-                  onClick={handleForgotPassword}
-                >
-                  Forgot Password?
-                </a>
-              </div>
-              <button type="submit">Login</button>
-              <button
-                type="button"
-                className="signup-button"
-                onClick={handleSignUp}
-              >
-                Sign up
-              </button>
-            </div>
-          </form>
-
-          <p className="or-login-with">OR LOGIN WITH</p>
-
-          <button className="google-login" onClick={handleGoogleLogin}>
-            <img src={googleLogo} alt="Google Logo" />
-            Google
-          </button>
         </div>
-        <div className="login-image">
-          <img src={image1} alt="Login Illustration" /> {/* Updated alt text */}
-        </div>
-      </div>
-    </GoogleOAuthProvider>
-  );
+    );
 };
 
 export default Login;

@@ -1,0 +1,46 @@
+.account-management {
+    text-align: center;
+    background-color: #e5e8e8;
+  }
+
+  
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-content-account {
+    background-color: #d5d8dc;
+    text-align: left;
+    width: 48%;
+    border-radius: 0;
+  }
+
+  .card-content1-account {
+    background-color: #d5d8dc;
+    text-align: left;
+    border-radius: 0;
+    margin-top: 30px;
+  }
+  
+  .search-section {
+    background-color: #d5d8dc;
+    margin-top: 30px;
+    text-align: left;
+    padding: 30px;
+  }
+
+  .search-section ul {
+    list-style: none; /* Loại bỏ dấu liệt kê cho danh sách */
+    padding: 0;
+    color: #333;
+  }
+  
+  .search-section li {
+    margin-bottom: 5px;
+  }
+
+  .search-section a {
+    color: #1a1b1b; 
+    text-decoration: none;
+  }

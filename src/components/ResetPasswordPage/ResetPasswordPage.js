@@ -1,107 +1,130 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './ResetPasswordPage.css';
-import amazingTechLogo from '../../assets/AmazingTech.png';
-import illustration from '../../assets/image1.png';
+import React, { useState } from "react";
+import { Button, Input, Form, Dropdown, Menu, message } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./ResetPasswordPage.css";
 
 const ResetPasswordPage = () => {
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+  const [language, setLanguage] = useState("en");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email;
 
-    useEffect(() => {
-        // Lấy email từ localStorage
-        const savedEmail = localStorage.getItem('resetEmail');
-        if (savedEmail) {
-            setEmail(savedEmail);
-        } else {
-            setErrorMessage('No email found for resetting password.');
-        }
-    }, []);
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+    if (values.newPassword === values.confirmPassword) {
+      // Xử lý logic thay đổi mật khẩu ở đây
+      // Trong trường hợp thực tế, bạn sẽ gọi API để cập nhật mật khẩu
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMessage('');
+      message.success("Password changed successfully!");
+      navigate("/login"); // Chuyển hướng về trang đăng nhập
+    } else {
+      message.error("The two passwords do not match!");
+    }
+  };
 
-        if (newPassword !== confirmPassword) {
-            setErrorMessage('Passwords do not match!');
-            return;
-        }
+  const handleLanguageChange = ({ key }) => {
+    setLanguage(key);
+  };
 
-        try {
-            // Tìm người dùng dựa trên email đã lưu
-            const response = await axios.get('https://66c3f496b026f3cc6ced9351.mockapi.io/user');
-            const users = response.data;
-            const user = users.find(u => u.email === email);
+  const languageMenu = (
+    <Menu onClick={handleLanguageChange}>
+      <Menu.Item key="en">
+        <img
+          src="/assets/login/flag-en.png"
+          alt="English"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        English
+      </Menu.Item>
+      <Menu.Item key="vi">
+        <img
+          src="/assets/login/flag-vi.png"
+          alt="Tiếng Việt"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        Tiếng Việt
+      </Menu.Item>
+    </Menu>
+  );
 
-            if (user) {
-                // Gửi yêu cầu PUT để cập nhật mật khẩu
-                await axios.put(`https://66c3f496b026f3cc6ced9351.mockapi.io/user/${user.id}`, {
-                    ...user,
-                    password: newPassword
-                });
-
-                alert('Password changed successfully!');
-                navigate('/login'); // Điều hướng về trang đăng nhập sau khi thành công
-            } else {
-                setErrorMessage('User not found!');
-            }
-        } catch (error) {
-            console.error('Error resetting password:', error);
-            setErrorMessage('An error occurred. Please try again later.');
-        }
-    };
-
-    return (
-        <div className="reset-password-page">
-            <header className="reset-password-header">
-                <img src={amazingTechLogo} alt="AmazingTech Logo" className="reset-password-page-logo" />
-                <div className="language-selector">
-                    <select>
-                        <option value="en">EN</option>
-                        <option value="vi">VN</option>
-                    </select>
-                </div>
-            </header>
-            <div className="reset-password-container">
-                <div className="reset-password-form">
-                    <h2>Change Password</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group-RP">
-                            <label htmlFor="new-password">New Password *</label>
-                            <input
-                                id="new-password"
-                                type="password"
-                                placeholder="Enter new password"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="form-group-RP">
-                            <label htmlFor="confirm-password">Confirm New Password *</label>
-                            <input
-                                id="confirm-password"
-                                type="password"
-                                placeholder="Re-enter your password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        {errorMessage && <p className="error-message">{errorMessage}</p>}
-                        <button type="submit" className="reset-password-button">Change Password</button>
-                    </form>
-                </div>
-                <div className="reset-password-illustration">
-                    <img src={illustration} alt="Illustration" />
-                </div>
-            </div>
+  return (
+    <div className="login-page">
+      <header className="login-header">
+        <div className="logo">
+          <img src="/assets/login/AmazingTech.png" alt="Amazing Tech Logo" />
         </div>
-    );
+        <div className="language-selector">
+          <Dropdown overlay={languageMenu} trigger={["click"]}>
+            <Button>
+              <img
+                src={`/assets/login/flag-${language}.png`}
+                alt={language === "en" ? "English" : "Tiếng Việt"}
+                style={{ marginRight: 8, width: 30, height: 20 }}
+              />
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
+      </header>
+
+      <div className="reset-password-container">
+        <div className="reset-password-form">
+          <h1 className="reset-password-title">Change Password</h1>
+          <p>Changing password for email: {email}</p>
+
+          <Form className="reset-password-form" name="change_password" onFinish={onFinish} layout="vertical">
+            <Form.Item
+              label="New Password"
+              name="newPassword"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your new password!",
+                },
+              ]}
+            >
+              <Input.Password className="reset-password-input" placeholder="Enter new password" />
+            </Form.Item>
+            <Form.Item
+              label="Confirm New Password"
+              name="confirmPassword"
+              dependencies={['newPassword']}
+              rules={[
+                {
+                  required: true,
+                  message: "Please confirm your new password!",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('newPassword') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('The two passwords do not match!'));
+                  },
+                }),
+              ]}
+            >
+              <Input.Password className="reset-password-input" placeholder="Confirm new password" />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="reset-password-button"
+              >
+                Change Password
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+
+        <div className="login-banner">
+          <img src="/assets/login/image1.png" alt="Login Banner" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ResetPasswordPage;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   DashboardOutlined,
   FileOutlined,
@@ -17,6 +17,11 @@ const { Sider } = Layout;
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleUserInfoClick = () => {
+    navigate('/account-management');
+  };
 
   return (
     <Sider width={350} className="site-layout-background">
@@ -60,7 +65,7 @@ const Sidebar = () => {
         </Menu.Item>
       </Menu>
       <div className="sidebar-footer" style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
-        <div className="user-info" style={{ padding: '20px' }}>
+        <div className="user-info" style={{ padding: '20px', cursor: 'pointer' }} onClick={handleUserInfoClick}>
           <div className='img-user'>
             <img src="../assets/images/user.png" alt="User" />
           </div>

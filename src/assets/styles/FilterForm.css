@@ -19,9 +19,12 @@
     width: 120px;
     height: 40px;
   }
-
+.filter-form-cv{
+    padding: 25px 40px 0;
+    margin: 40px 60px;
+}
   
-  .ant-form-vertical{
+  .filter-form-container{
     margin-top: 40px;
     display: flex;
     align-items: center;

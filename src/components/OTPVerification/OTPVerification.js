@@ -1,100 +1,166 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './OTPVerification.css';
-import amazingTechLogo from '../../assets/AmazingTech.png';
-import image1 from '../../assets/image1.png';
+import React, { useState, useRef, useEffect } from "react";
+import { Button, Input, Form, Dropdown, Menu, message } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./OTPVerification.css";
 
 const OTPVerification = () => {
-    const [otp, setOtp] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [timer, setTimer] = useState(60);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email;
 
-    useEffect(() => {
-        if (timer === 0) return;
+  const [language, setLanguage] = useState("en");
+  const [timer, setTimer] = useState(60);
+  const [canResend, setCanResend] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const inputRefs = [useRef(), useRef(), useRef(), useRef()];
 
-        const interval = setInterval(() => {
-            setTimer(prev => prev - 1);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [timer]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrorMessage('');
-
-        if (otp === '1234') { // Giả sử OTP đúng là '1234', thay đổi nếu cần
-            alert('OTP successfully verified!');
-            navigate('/reset-password-page'); // Chuyển hướng đến ResetPasswordPage
-        } else {
-            setErrorMessage('The OTP code is incorrect!!');
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prevTimer) => {
+        if (prevTimer === 0) {
+          clearInterval(interval);
+          setCanResend(true);
+          return 0;
         }
-    };
+        return prevTimer - 1;
+      });
+    }, 1000);
 
-    const formatTime = (seconds) => {
-        const minutes = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-    };
+    return () => clearInterval(interval);
+  }, []);
 
-    const handleChange = (e, index) => {
-        const value = e.target.value;
-        if (value.match(/^[0-9]$/)) {
-            setOtp(prev => prev.substring(0, index) + value + prev.substring(index + 1));
-        }
-    };
+  const handleOtpChange = (value, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
 
-    const handleForgotPassword = () => {
-        // Logic for handling forgot password
-    };
+    if (value !== "" && index < 3) {
+      inputRefs[index + 1].current.focus();
+    }
+  };
 
-    return (
-        <div className="otp-verification-page">
-            <header className="otp-verification-header">
-                <img src={amazingTechLogo} alt="AmazingTech Logo" className="otp-verification-logo" />
-                <div className="language-selector">
-                    <select>
-                        <option value="en">EN</option>
-                        <option value="vi">VN</option>
-                    </select>
-                </div>
-            </header>
-            <div className="otp-verification-container">
-                <div className="otp-verification-form">
-                    <h2>OTP Verification</h2>
-                    <p>Enter the 4 digit verification code received on your Email ID.</p>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group-OTP">
-                            {[...Array(4)].map((_, index) => (
-                                <input
-                                    key={index}
-                                    type="text"
-                                    maxLength="1"
-                                    value={otp[index] || ''}
-                                    onChange={(e) => handleChange(e, index)}
-                                    required
-                                />
-                            ))}
-                        </div>
-                        {errorMessage && <p className="error-message">{errorMessage}</p>}
-                        <div className="otp-footer">
-                            <div className="timer-and-resend">
-                                <p className="timer">Verification code expires in: {formatTime(timer)}</p>
-                                <button className="resend-otp-button" onClick={handleForgotPassword}>
-                                    Resend OTP
-                                </button>
-                            </div>
-                            <button type="submit" className="otp-verification-button">Verify OTP</button>
-                        </div>
-                    </form>
-                </div>
-                <div className="otp-verification-image">
-                    <img src={image1} alt="OTP Verification" />
-                </div>
-            </div>
+  const handleResendOTP = () => {
+    // Logic to resend OTP
+    setTimer(60);
+    setCanResend(false);
+    message.success("OTP resent successfully!");
+  };
+
+  const onFinish = () => {
+    const enteredOTP = otp.join("");
+    if (enteredOTP === "1234") {
+      message.success("OTP verified successfully!");
+      navigate("/reset-password-page", { state: { email } });
+    } else {
+      message.error("Invalid OTP. Please try again.");
+    }
+  };
+
+  const handleLanguageChange = ({ key }) => {
+    setLanguage(key);
+  };
+
+  const languageMenu = (
+    <Menu onClick={handleLanguageChange}>
+      <Menu.Item key="en">
+        <img
+          src="/assets/login/flag-en.png"
+          alt="English"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        English
+      </Menu.Item>
+      <Menu.Item key="vi">
+        <img
+          src="/assets/login/flag-vi.png"
+          alt="Tiếng Việt"
+          style={{ marginRight: 8, width: 30, height: 20 }}
+        />
+        Tiếng Việt
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <div className="login-page">
+      <header className="login-header">
+        <div className="logo">
+          <img src="/assets/login/AmazingTech.png" alt="Amazing Tech Logo" />
         </div>
-    );
+        <div className="language-selector">
+          <Dropdown overlay={languageMenu} trigger={["click"]}>
+            <Button>
+              <img
+                src={`/assets/login/flag-${language}.png`}
+                alt={language === "en" ? "English" : "Tiếng Việt"}
+                style={{ marginRight: 8, width: 30, height: 20 }}
+              />
+              <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
+      </header>
+
+      <div className="login-content">
+        <div className="otp-verification-container">
+          <div className="otp-verification-form">
+            <h1 className="otp-verification-title">OTP Verification</h1>
+            <p className="otp-verification-instruction">
+              Enter the 4 digit verification code received on your Email ID: {email}
+            </p>
+            <Form
+              className="otp-verification-form-content"
+              onFinish={onFinish}
+              layout="vertical"
+            >
+              <div className="otp-input-container">
+                <div className="otp-input-container-content">
+                  <label>Verification code :</label>
+                  <span className="otp-timer">{`${Math.floor(timer / 60)}:${
+                    timer % 60 < 10 ? "0" : ""
+                  }${timer % 60}`}</span>
+                </div>
+                <Button
+                  type="link"
+                  className="resend-otp-button"
+                  onClick={handleResendOTP}
+                  disabled={!canResend}
+                >
+                  Resend OTP
+                </Button>
+              </div>
+              <div className="otp-inputs">
+                {otp.map((digit, index) => (
+                  <Input
+                    key={index}
+                    ref={inputRefs[index]}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(e.target.value, index)}
+                    maxLength={1}
+                    className="otp-input"
+                  />
+                ))}
+              </div>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="verify-button"
+                >
+                  Verify
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        </div>
+
+        <div className="login-banner">
+          <img src="/assets/login/image1.png" alt="Login Banner" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default OTPVerification;

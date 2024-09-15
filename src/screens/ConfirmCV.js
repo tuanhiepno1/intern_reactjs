@@ -202,6 +202,7 @@ const ConfirmCV = ({ cvData, loading }) => {
       layout="vertical"
       onFinish={onFinish}
       style={{ backgroundColor: "#fff", borderRadius: "34px" }}
+      className="filter-form-cv"
     >
       <div className="input-check">
         <div className="input-fields">
