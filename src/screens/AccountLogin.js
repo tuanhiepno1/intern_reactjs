@@ -20,7 +20,9 @@ const AccountLogin = () => {
   const handleAccountClick = () => {
     navigate('/dashboard');
   };
-
+  const handleLogin = () => {
+    navigate('/login');
+  };
   const handleClose = () => {
     setIsModalVisible(false);
     // Thêm logic để quay lại trang trước đó nếu cần
@@ -59,8 +61,8 @@ const AccountLogin = () => {
         )}
       />
       <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between' }}>
-        <Button icon={<PlusOutlined />}>Add account</Button>
-        <Button icon={<LogoutOutlined />}>Sign out</Button>
+        <Button icon={<PlusOutlined />} onClick={handleLogin}>Add account</Button>
+        <Button icon={<LogoutOutlined />} onClick={handleLogin}>Sign out</Button>
       </div>
     </Modal>
   );
