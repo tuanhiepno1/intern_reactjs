@@ -22,6 +22,7 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import "../assets/styles/FilterForm.css";
+import "../assets/styles/ViewOfIntern.css";
 
 const { Option } = Select;
 const { Text } = Typography;

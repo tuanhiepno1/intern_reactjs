@@ -1,0 +1,59 @@
+/* Styles for the modal and its content */
+.modal {
+    width: 1000px; /* Width as specified in the React component */
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .intern-details-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates two columns */
+    gap: 20px; /* Space between grid items */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Space between form groups */
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-control[disabled] {
+    background: #f7f7f7;
+    color: #333;
+  }
+  
+  .form-control a {
+    text-decoration: none;
+    color: blue;
+  }
+  
+  /* Style for the OK and Cancel buttons if added */
+  .button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #004494;
+  }
+  
